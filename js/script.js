@@ -167,46 +167,55 @@ function getImagesOfCar(carImgsArray, dataArray) {
 }
 
 /**
- * Vérifie de manière asynchrone les images des voitures à l'aide d'un script PHP.
+ * Envoie les images des voitures au script PHP via une requête POST et met à jour les données locales avec la réponse.
+ * @param {Array} carImagesArray - Tableau contenant les images de voitures à envoyer.
  * @param {Array} dataArray - Tableau contenant les données des voitures regroupées par marque.
+ * @returns {Promise} - La promesse de l'envoi des images et de la mise à jour des données locales.
  */
-async function verifyImagesOfCar(dataArray) {
-  // Crée un tableau pour stocker toutes les images des voitures
-  let carImagesArray = new Array();
-  getImagesOfCar(carImagesArray, dataArray);
-
-  // Convertit le tableau d'images de voiture au format JSON
+async function sendImagesToServer(carImagesArray, dataArray) {
   let jsonCarImages = JSON.stringify(carImagesArray);
-
-  // Envoie une requête POST au script PHP pour la vérification des images
   await fetch("../php/verify_images.php", {
     method: "POST",
     body: jsonCarImages,
   })
     .then((response) => response.json()) // Récupère le texte de la réponse du script PHP
     .then((data) => {
-      // Traite les données de la réponse
       if (data.error) {
-        console.log(data.error); // Journalise les erreurs éventuelles reçues du script PHP
+        console.log(data.error);
       } else {
-        let indexArrayJSON = 0;
-        // Met à jour les images des voitures et les propriétés associées en fonction de la réponse
-        for (let brand of dataArray) {
-          for (let car of brand.cars) {
-            car.imagesCar = data[indexArrayJSON];
-            indexArrayJSON++;
-            car.maxIndexSlide = car.imagesCar.length - 1;
-            // Définit l'index actuel pour le diaporama d'images, par défaut à 0 s'il n'y a pas d'images disponibles
-            if (car.imagesCar.length === 0) {
-              car.currentIndexSlide = 0;
-            }
-          }
-        }
+        updateCarImages(data, dataArray);
       }
     })
     .catch((error) => {
-      console.error("Erreur : " + error.message); // Journalise les erreurs réseau ou de traitement
+      console.error("Erreur : " + error.message);
     });
+}
+
+/**
+ * Met à jour les images des voitures et les propriétés associées en fonction des données de réponse.
+ * @param {Array} data - Données de réponse du script PHP contenant les images des voitures.
+ * @param {Array} dataArray - Tableau contenant les données des voitures regroupées par marque.
+ */
+function updateCarImages(data, dataArray) {
+  let indexArrayJSON = 0;
+  for (let brand of dataArray) {
+    for (let car of brand.cars) {
+      car.imagesCar = data[indexArrayJSON];
+      indexArrayJSON++;
+      car.maxIndexSlide = car.imagesCar.length - 1;
+    }
+  }
+}
+
+/**
+ * Vérifie les images des voitures en collectant, envoyant et mettant à jour les données d'images.
+ * @param {Array} dataArray - Tableau contenant les données des voitures regroupées par marque.
+ */
+async function verifyImagesOfCar(dataArray) {
+  let carImagesArray = new Array();
+  getImagesOfCar(carImagesArray, dataArray);
+
+  await sendImagesToServer(carImagesArray, dataArray);
 }
 
 function createImageSliderString(car) {
