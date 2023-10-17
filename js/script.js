@@ -218,13 +218,20 @@ async function verifyImagesOfCar(dataArray) {
   await sendImagesToServer(carImagesArray, dataArray);
 }
 
+/**
+ * Crée une chaîne de caractères représentant le slider d'images pour une voiture donnée.
+ * @param {Object} car - Objet représentant les données d'une voiture.
+ * @returns {string} - Chaîne de caractères HTML représentant le slider d'images pour la voiture.
+ */
 function createImageSliderString(car) {
   const imagesHTML = car.imagesCar.map((img, index) => {
     const isActive = index === 0 ? "img-active" : ""; // Ajouter la classe 'active' à la première image
     return `<img class="img-slide ${isActive}" src="${img}">`;
   });
+
   // Remise de currentIndexSlide à 0 pour éviter le décalage lors de la recherche
   car.currentIndexSlide = 0;
+
   return imagesHTML.join("\n");
 }
 
