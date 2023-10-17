@@ -295,80 +295,174 @@ function showCarListInBrand(idBrand) {
 // Assignation de la fonction showCarListInBrand à la propriété window pour la rendre accessible globalement
 window.showCarListInBrand = showCarListInBrand;
 
-// Décomposer en plusieurs fonction
+// TO DO ??
+// Fonction pour créer globalement div -> class [...] id [...]
+
+/**
+ * Crée un élément de div représentant un élément de tableau pour une marque spécifique.
+ * @param {number} indiceBrand - L'indice de la marque pour laquelle créer l'élément de div du tableau.
+ * @returns {HTMLDivElement} - L'élément de div créé représentant l'élément de tableau pour la marque.
+ */
+function createDivTableItem(indiceBrand) {
+  // Crée un nouvel élément de div
+  const div = document.createElement("div");
+
+  // Définit les attributs de classe et d'identifiant pour l'élément de div
+  div.setAttribute("class", "table-item scroll-target");
+  div.setAttribute("id", `id_${indiceBrand}`);
+
+  return div;
+}
+
+/**
+ * Crée un élément de div représentant une marque dans le tableau.
+ * @param {Brand} brand - Objet représentant les données d'une marque de voiture.
+ * @returns {HTMLDivElement} - L'élément de div créé représentant la marque dans le tableau.
+ */
+function createDivTableBrand(brand) {
+  // Crée un nouvel élément de div
+  const div = document.createElement("div");
+
+  // Définit la classe de l'élément de div
+  div.setAttribute("class", "table-brand");
+
+  // Remplit le contenu HTML de l'élément de div avec les données de la marque
+  div.innerHTML = `
+    <div class="container-logo-brand"> 
+      <img class="brand-logo" src="${brand["logo"]}">
+    </div>
+
+    <div class="brand-info">
+      <div class="brand-name">${brand["brand"]}</div>
+      <div class="nbr-resultat">Nombre de résultat : ${brand["cars"].length}</div>
+    </div>
+  `;
+
+  return div;
+}
+
+/**
+ * Crée un élément de div représentant le bouton "Voir plus" pour une marque donnée.
+ * @param {number} indiceBrand - L'indice de la marque pour laquelle créer le bouton "Voir plus".
+ * @returns {HTMLDivElement} - L'élément de div créé représentant le bouton "Voir plus" pour la marque.
+ */
+function createDivVoirPlus(indiceBrand) {
+  // Crée un nouvel élément de div
+  const div = document.createElement("div");
+
+  // Définit la classe de l'élément de div
+  div.setAttribute("class", "table-voir-plus");
+
+  // Remplit le contenu HTML de l'élément de div avec le bouton "Voir plus" et ajoute le gestionnaire d'événement
+  div.innerHTML = `
+    <a href="#id_${indiceBrand}" class="brand_${indiceBrand}" onclick="window.showCarListInBrand(${indiceBrand})">
+      <img class="brand-button brand-img-active" src="../assets/imgs/catalogue/voir_plus_open.png">
+      <img class="brand-button" src="../assets/imgs/catalogue/voir_plus_close.png">
+    </a>
+  `;
+
+  return div;
+}
+
+/**
+ * Crée un élément de div représentant le conteneur des voitures d'une marque.
+ * @returns {HTMLDivElement} - L'élément de div créé représentant le conteneur des voitures de la marque.
+ */
+function createDivContainerBrandCar() {
+  const div = document.createElement("div");
+  div.setAttribute("class", "table-container-brand-car");
+
+  return div;
+}
+
+/**
+ * Crée un élément de div représentant le conteneur des voitures pour une marque spécifique.
+ * @param {number} indiceBrand - L'indice de la marque pour laquelle créer le conteneur des voitures.
+ * @returns {HTMLDivElement} - L'élément de div créé représentant le conteneur des voitures de la marque.
+ */
+function createContainerCar(indiceBrand) {
+  const div = document.createElement("div");
+  div.setAttribute("class", "table-container-car");
+  div.setAttribute("id", `id_brand_${indiceBrand}`);
+
+  return div;
+}
+
+/**
+ * Crée le contenu HTML du conteneur d'images pour une voiture spécifique.
+ * @param {Object} carObject - L'objet représentant les données d'une voiture.
+ * @param {number} indiceBrand - L'indice de la marque à laquelle appartient la voiture.
+ * @param {number} counterCar - L'indice de la voiture dans le contexte de sa marque.
+ * @returns {string} - Le contenu HTML du conteneur d'images pour la voiture.
+ */
+function createContainerImageHTML(carObject, indiceBrand, counterCar) {
+  // Génère le code HTML du slider d'images pour la voiture
+  let sliderHTML = createImageSliderString(carObject);
+
+  // Crée les fonctions de glissement pour le slider
+  let swipeRight = `window.swipeImagesOfSlider('right', ${indiceBrand}, ${counterCar})`;
+  let swipeLeft = `window.swipeImagesOfSlider('left', ${indiceBrand}, ${counterCar})`;
+
+  // Génère le contenu HTML complet du conteneur d'images avec les boutons de glissement
+  let containerImageHTML = `
+    <a href="javascript:void(0)" onclick="${swipeLeft}">
+      <img class="angle" src="../assets/imgs/icone/angle-gauche.png">
+    </a>
+
+    <div class="slider_${indiceBrand}_${counterCar}">
+      ${sliderHTML}
+    </div>
+
+    <a href="javascript:void(0)" onclick="${swipeRight}">
+      <img class="angle" src="../assets/imgs/icone/angle-droit.png">
+    </a>
+  `;
+
+  return containerImageHTML;
+}
+
 function createCarList(carList) {
-  if (carList.length !== 0) {
+  // Vérifie si l'objet carList contient des éléments
+  if (Object.keys(carList).length !== 0) {
+    // Chaîne HTML représentant une image par défaut en cas d'absence d'images disponibles
     let noImagesAvailable = `<img class="img-slide img-active" src="../assets/imgs/catalogue/image_not_available.png">`;
 
+    // Boucle parcourant chaque marque dans l'objet carList
     for (let brand in carList) {
-      const divTableItem = document.createElement("div");
-      divTableItem.setAttribute("class", "table-item scroll-target");
-      divTableItem.setAttribute("id", `id_${brand}`);
+      // Crée un élément de div représentant un élément de tableau incluant une section pour la marque et la liste des voitures
+      const divTableItem = createDivTableItem(brand);
 
-      const divTableBrand = document.createElement("div");
-      divTableBrand.setAttribute("class", "table-brand");
-      divTableBrand.innerHTML = `
-            <div class="container-logo-brand"> 
-                <img class="brand-logo" src="${carList[brand]["logo"]}">
-            </div>
+      // Crée un élément de div représentant la marque dans le tableau
+      const divTableBrand = createDivTableBrand(carList[brand]);
 
-            <div class="brand-info">
-                <div class="brand-name">${carList[brand]["brand"]}</div>
-                <div class="nbr-resultat">Nombre de résultat : ${carList[brand]["cars"].length}</div>
-            </div>
-            `;
+      // Crée un élément de div représentant le bouton "Voir plus" pour la marque spécifique
+      const divVoirPlus = createDivVoirPlus(brand);
 
-      const divVoirPlus = document.createElement("div");
-      divVoirPlus.setAttribute("class", "table-voir-plus");
+      // Crée un élément de div représentant le conteneur des voitures de la marque
+      const divContainerBrandCar = createDivContainerBrandCar();
 
-      divVoirPlus.innerHTML = `
-            <a href="#id_${brand}" class="brand_${brand}" onclick="window.showCarListInBrand(${brand})">
-                <img class="brand-button brand-img-active" src="../assets/imgs/catalogue/voir_plus_open.png">
-                <img class="brand-button" src="../assets/imgs/catalogue/voir_plus_close.png">
-            </a>
-            `;
+      // Crée un élément de div représentant le conteneur des voitures pour la marque spécifique
+      const divContainerCar = createContainerCar(brand);
 
-      const divContainerBrandCar = document.createElement("div");
-      divContainerBrandCar.setAttribute("class", "table-container-brand-car");
-
-      const divContainerCar = document.createElement("div");
-      divContainerCar.setAttribute("class", "table-container-car");
-      divContainerCar.setAttribute("id", `id_brand_${brand}`);
-
-      let numberOfCar = 0;
+      let counterOfCar = 0;
+      let containerImageHTML; // Voir c'est quoi le mieux entre le mettre en dehors ou à l'intérieur
+      // Detruis || Assigne nouvelle valeur à chaque tour de boucle
       for (let car of carList[brand]["cars"]) {
-        let slider =
-          car.imagesCar.length === 0
-            ? noImagesAvailable
-            : createImageSliderString(car);
-
-        let swipeRight = `window.swipeImagesOfSlider('right', ${brand}, ${numberOfCar})`;
-        let swipeLeft = `window.swipeImagesOfSlider('left', ${brand}, ${numberOfCar})`;
-
-        let containerImg;
         if (car.imagesCar.length === 0) {
-          containerImg = noImagesAvailable;
+          containerImageHTML = noImagesAvailable;
         } else {
-          containerImg = `
-                    <a href="javascript:void(0)" onclick="${swipeLeft}">
-                        <img class=angle src="../assets/imgs/icone/angle-gauche.png">
-                    </a>
-
-                    <div class="slider_${brand}_${numberOfCar}">
-                        ${slider}
-                    </div>
-
-                    <a href="javascript:void(0)" onclick="${swipeRight}">
-                        <img class="angle" src="../assets/imgs/icone/angle-droit.png">
-                    </a>
-                    `;
+          containerImageHTML = createContainerImageHTML(
+            car,
+            brand,
+            counterOfCar
+          );
         }
 
         const divCar = document.createElement("div");
         divCar.setAttribute("class", "table-car");
         divCar.innerHTML = `
                 <div class="container-img">
-                    ${containerImg}
+                    ${containerImageHTML}
                 </div>
 
                 <div class="car-info">
@@ -389,7 +483,7 @@ function createCarList(carList) {
                     }" class="button">En savoir plus →</a>
                 </div>
                 `;
-        numberOfCar++;
+        counterOfCar++;
         if (divContainerCar !== null) {
           divContainerCar.appendChild(divCar);
         }
