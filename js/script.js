@@ -101,8 +101,8 @@ function createInstanceOfCar(data) {
 // CHANGER COMMENTAIRE ORDERLIST
 /**
  * Prend un tableau d'objets de type 'Brand' en entrée
- * et renvoie le même tableau après l'avoir trié par ordre alphabétique de la marque et des voitures par nom.
- * @param {array} data - Tableau de dictionnaire.
+ * et trie le tableau par ordre alphabétique de la marque et des voitures par nom.
+ * @param {array} data - Tableau de dictionnaire de type Brand.
  */
 function sortData(data) {
   // Trie les données principales par marque (ordre alphabétique)
@@ -113,6 +113,10 @@ function sortData(data) {
   }
 }
 
+/**
+ * Trie le tableau de données par marque (ordre alphabétique).
+ * @param {array} data - Tableau de dictionnaire de type Brand.
+ */
 function sortBrand(data) {
   data.sort((a, b) => {
     const currentBrand = a.brand.toLowerCase();
@@ -128,6 +132,11 @@ function sortBrand(data) {
   });
 }
 
+/**
+ * Trie le tableau de voitures d'une marque spécifique par nom (ordre alphabétique).
+ * @param {string/number} brand - Marque que l'on souhaite trier.
+ * @param {array} data - Tableau de dictionnaire de type Brand.
+ */
 function sortCarInBrand(brand, data) {
   // Récupère le tableau des voitures de la marque actuelle
   const carsOfBrand = data[brand]["cars"];
