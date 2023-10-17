@@ -1,0 +1,388 @@
+[
+  {
+    "brand": "Ferrari",
+    "logo": "../assets/imgs/logo-marque/logo_ferrari.png",
+    "cars": [
+      {
+        "name": "Purosangue",
+        "brand": "Ferrari",
+        "brandAndName": "Ferrari Purosangue",
+        "parameter": {
+          "path": "./ferrari/ferrari-purosangue.html",
+          "image": [
+            "../assets/imgs/catalogue/ferrari/ferrari_purosangue_1.png",
+            "../assets/imgs/catalogue/ferrari/ferrari_purosangue_2.png",
+            "../assets/imgs/catalogue/ferrari/ferrari_purosangue_3.png"
+          ],
+          "rate": {
+            "hourly": 1,
+            "daily": 2,
+            "weekly": 3,
+            "weekend": 4,
+            "monthly": 5,
+            "special": 6
+          },
+          "availability": true
+        }
+      },
+
+      {
+        "name": "812 Competizione",
+        "brandAndName": "Ferrari 812 Competizione",
+        "parameter": {
+          "path": "./ferrari/ferrari-812-competizione.html",
+          "image": [
+            "../assets/imgs/catalogue/ferrari/ferrari_812_competizione_1.png",
+            "../assets/imgs/catalogue/ferrari/ferrari_812_competizione_2.png",
+            "../assets/imgs/catalogue/ferrari/ferrari_812_competizione_3.png"
+          ],
+          "rate": {
+            "hourly": 1,
+            "daily": 2,
+            "weekly": 3,
+            "weekend": 4,
+            "monthly": 5,
+            "special": 6
+          },
+          "availability": true
+        }
+      },
+
+      {
+        "name": "SF90 Stradale",
+        "brandAndName": "Ferrari SF90 Stradale",
+        "parameter": {
+          "path": "./ferrari/ferrari-812-competizione.html",
+          "image": [
+            "../assets/imgs/catalogue/ferrari/ferrari_sf90_stradale_1.png",
+            "../assets/imgs/catalogue/ferrari/ferrari_sf90_stradale_2.png",
+            "../assets/imgs/catalogue/ferrari/ferrari_sf90_stradale_3.png"
+          ],
+          "rate": {
+            "hourly": 1,
+            "daily": 2,
+            "weekly": 3,
+            "weekend": 4,
+            "monthly": 5,
+            "special": 6
+          },
+          "availability": true
+        }
+      },
+
+      {
+        "name": "Roma",
+        "brandAndName": "Ferrari Roma",
+        "parameter": {
+          "path": "./ferrari/ferrari-roma.html",
+          "image": [
+            "../assets/imgs/catalogue/ferrari/ferrari_roma_1.png",
+            "../assets/imgs/catalogue/ferrari/ferrari_roma_2.png",
+            "../assets/imgs/catalogue/ferrari/ferrari_roma_3.png"
+          ],
+          "rate": {
+            "hourly": 1,
+            "daily": 2,
+            "weekly": 3,
+            "weekend": 4,
+            "monthly": 5,
+            "special": 6
+          },
+          "availability": true
+        }
+      }
+    ]
+  },
+
+  {
+    "brand": "Audi",
+    "logo": "../assets/imgs/logo-marque/logo_audi.png",
+    "cars": [
+      {
+        "name": "RS e-tron GT",
+        "brandAndName": "Audi RS e-tron GT",
+        "parameter": {
+          "path": "./audi/audi-rs-etron-gt.html",
+          "image": [
+            "../assets/imgs/catalogue/audi/rs_etron_gt/audi_rs_etron_gt_1.png",
+            "../assets/imgs/catalogue/audi/rs_etron_gt/audi_rs_etron_gt_2.png",
+            "../assets/imgs/catalogue/audi/rs_etron_gt/audi_rs_etron_gt_3.png",
+            "../assets/imgs/catalogue/audi/rs_etron_gt/audi_rs_etron_gt_4.png",
+            "../assets/imgs/catalogue/audi/rs_etron_gt/audi_rs_etron_gt_5.png"
+          ],
+          "rate": {
+            "hourly": 1,
+            "daily": 2,
+            "weekly": 3,
+            "weekend": 4,
+            "monthly": 5,
+            "special": 6
+          },
+          "availability": true
+        }
+      },
+
+      {
+        "name": "RS3 Sportback",
+        "brandAndName": "Audi RS3 Sportback",
+        "parameter": {
+          "path": "./audi/audi-rs3.html",
+          "image": [
+            "../assets/imgs/catalogue/audi/rs3_sportback/audi_rs3_sportback_1.png",
+            "../assets/imgs/catalogue/audi/rs3_sportback/audi_rs3_sportback_2.png",
+            "../assets/imgs/catalogue/audi/rs3_sportback/audi_rs3_sportback_3.png"
+          ],
+          "rate": {
+            "hourly": 1,
+            "daily": 2,
+            "weekly": 3,
+            "weekend": 4,
+            "monthly": 5,
+            "special": 6
+          },
+          "availability": true
+        }
+      },
+
+      {
+        "name": "R8 GT",
+        "brandAndName": "Audi R8 GT",
+        "parameter": {
+          "path": "./audi/audi-r8-gt.html",
+          "image": [
+            "../assets/imgs/catalogue/audi/r8_gt/audi_r8_gt_1.png",
+            "../assets/imgs/catalogue/audi/r8_gt/audi_r8_gt_2.png",
+            "../assets/imgs/catalogue/audi/r8_gt/audi_r8_gt_3.png",
+            "../assets/imgs/catalogue/audi/r8_gt/audi_r8_gt_4.png",
+            "../assets/imgs/catalogue/audi/r8_gt/audi_r8_gt_5.png"
+          ],
+          "rate": {
+            "hourly": 1,
+            "daily": 2,
+            "weekly": 3,
+            "weekend": 4,
+            "monthly": 5,
+            "special": 6
+          },
+          "availability": true
+        }
+      }
+    ]
+  },
+
+  {
+    "brand": "BMW",
+    "logo": "../assets/imgs/logo-marque/logo_bmw.png",
+    "cars": [
+      {
+        "name": "M3 Touring",
+        "brandAndName": "BMW M3 Touring",
+        "parameter": {
+          "path": "./bmw/bmw-m3-touring.html",
+          "image": [
+            "../assets/imgs/catalogue/bmw/bmw_m3_touring_1.png",
+            "../assets/imgs/catalogue/bmw/bmw_m3_touring_2.png",
+            "../assets/imgs/catalogue/bmw/bmw_m3_touring_3.png"
+          ],
+          "rate": {
+            "hourly": 1,
+            "daily": 2,
+            "weekly": 3,
+            "weekend": 4,
+            "monthly": 5,
+            "special": 6
+          },
+          "availability": true
+        }
+      },
+
+      {
+        "name": "M4",
+        "brandAndName": "BMW M4",
+        "parameter": {
+          "path": "./bmw/bmw-m4.html",
+          "image": [
+            "../assets/imgs/catalogue/bmw/bmw_m4_1.png",
+            "../assets/imgs/catalogue/bmw/bmw_m4_2.png",
+            "../assets/imgs/catalogue/bmw/bmw_m4_3.png"
+          ],
+          "rate": {
+            "hourly": 1,
+            "daily": 2,
+            "weekly": 3,
+            "weekend": 4,
+            "monthly": 5,
+            "special": 6
+          },
+          "availability": true
+        }
+      },
+
+      {
+        "name": "X6 M",
+        "brandAndName": "BMW X6 M",
+        "parameter": {
+          "path": "./bmw/bmw-x6-m.html",
+          "image": [
+            "../assets/imgs/catalogue/bmw/bmw_x6_m_1.png",
+            "../assets/imgs/catalogue/bmw/bmw_x6_m_2.png",
+            "../assets/imgs/catalogue/bmw/bmw_x6_m_3.png"
+          ],
+          "rate": {
+            "hourly": 1,
+            "daily": 2,
+            "weekly": 3,
+            "weekend": 4,
+            "monthly": 5,
+            "special": 6
+          },
+          "availability": true
+        }
+      }
+    ]
+  },
+
+  {
+    "brand": "Porsche",
+    "logo": "../assets/imgs/logo-marque/logo_porsche.png",
+    "cars": [
+      {
+        "name": "GTR3 RS",
+        "brandAndName": "Porsche GT3 RS",
+        "parameter": {
+          "path": "./porsche/porsche-gt3rs.html",
+          "image": [
+            "../assets/imgs/catalogue/porsche/porsche_gt3rs_1.png",
+            "../assets/imgs/catalogue/porsche/porsche_gt3rs_2.png",
+            "../assets/imgs/catalogue/porsche/porsche_gt3rs_3.png"
+          ],
+          "rate": {
+            "hourly": 1,
+            "daily": 2,
+            "weekly": 3,
+            "weekend": 4,
+            "monthly": 5,
+            "special": 6
+          },
+          "availability": true
+        }
+      },
+
+      {
+        "name": "Panamera Turbo S",
+        "brandAndName": "Porsche Panamera Turbo S",
+        "parameter": {
+          "path": "./porsche/porsche-panamera-turbo-s.html",
+          "image": [
+            "../assets/imgs/catalogue/porsche/porsche_panamera_turbo_s_1.png",
+            "../assets/imgs/catalogue/porsche/porsche_panamera_turbo_s_2.png",
+            "../assets/imgs/catalogue/porsche/porsche_panamera_turbo_s_3.png"
+          ],
+          "rate": {
+            "hourly": 1,
+            "daily": 2,
+            "weekly": 3,
+            "weekend": 4,
+            "monthly": 5,
+            "special": 6
+          },
+          "availability": true
+        }
+      },
+
+      {
+        "name": "Taycan Turbo S Cross Turismo",
+        "brandAndName": "Porsche Turbo S Cross Turismo",
+        "parameter": {
+          "path": "./porsche/porsche-taycan-turbo-s-cross-turismo.html",
+          "image": [
+            "../assets/imgs/catalogue/porsche/porsche_taycan_turbo_s_cross_turismo_1.png",
+            "../assets/imgs/catalogue/porsche/porsche_taycan_turbo_s_cross_turismo_2.png",
+            "../assets/imgs/catalogue/porsche/porsche_taycan_turbo_s_cross_turismo_3.png"
+          ],
+          "rate": {
+            "hourly": 1,
+            "daily": 2,
+            "weekly": 3,
+            "weekend": 4,
+            "monthly": 5,
+            "special": 6
+          },
+          "availability": true
+        }
+      }
+    ]
+  },
+
+  {
+    "brand": "Mercedes AMG",
+    "logo": "../assets/imgs/logo-marque/logo_mercedes.png",
+    "cars": [
+      {
+        "name": "A45 S",
+        "brandAndName": "Mercedes AMG A45 S",
+        "parameter": {
+          "path": "./mercedes/mercedes-amg-a-45-s.html",
+          "image": [
+            "../assets/imgs/catalogue/mercedes/mercedes_amg_a_45_s_1.png",
+            "../assets/imgs/catalogue/mercedes/mercedes_amg_a_45_s_2.png",
+            "../assets/imgs/catalogue/mercedes/mercedes_amg_a_45_s_3.png"
+          ],
+          "rate": {
+            "hourly": 1,
+            "daily": 2,
+            "weekly": 3,
+            "weekend": 4,
+            "monthly": 5,
+            "special": 6
+          },
+          "availability": true
+        }
+      },
+
+      {
+        "name": "E63 S",
+        "brandAndName": "Mercedes AMG E63 S",
+        "parameter": {
+          "path": "./mercedes/mercedes-amg-e-63-s.html",
+          "image": [
+            "../assets/imgs/catalogue/mercedes/mercedes_amg_e_63_s_1.png",
+            "../assets/imgs/catalogue/mercedes/mercedes_amg_e_63_s_2.png",
+            "../assets/imgs/catalogue/mercedes/mercedes_amg_e_63_s_3.png"
+          ],
+          "rate": {
+            "hourly": 1,
+            "daily": 2,
+            "weekly": 3,
+            "weekend": 4,
+            "monthly": 5,
+            "special": 6
+          },
+          "availability": true
+        }
+      },
+
+      {
+        "name": "GT 63 S E Performance",
+        "brandAndName": "Mercedes AMG GT 63 S E Performance",
+        "parameter": {
+          "path": "./mercedes/mercedes-amg-gt63-s-e-performance.html",
+          "image": [
+            "../assets/imgs/catalogue/mercedes/mercedes_amg_gt_63_s_e_perfomance_1.png",
+            "../assets/imgs/catalogue/mercedes/mercedes_amg_gt_63_s_e_perfomance_2.png",
+            "../assets/imgs/catalogue/mercedes/mercedes_amg_gt_63_s_e_perfomance_3.png"
+          ],
+          "rate": {
+            "hourly": 1,
+            "daily": 2,
+            "weekly": 3,
+            "weekend": 4,
+            "monthly": 5,
+            "special": 6
+          },
+          "availability": true
+        }
+      }
+    ]
+  }
+]
