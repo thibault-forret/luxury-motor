@@ -235,51 +235,64 @@ function createImageSliderString(car) {
   return imagesHTML.join("\n");
 }
 
+/**
+ * Permet de faire défiler les images du slider en fonction du bouton cliqué.
+ * @param {string} pressedButton - Le bouton de direction (gauche ou droite) qui a été pressé.
+ * @param {number} indiceBrand - L'indice de la marque de la voiture dans le tableau de données.
+ * @param {number} indiceCarInBrand - L'indice de la voiture dans le tableau de données de la marque.
+ */
 function swipeImagesOfSlider(pressedButton, indiceBrand, indiceCarInBrand) {
+  // Récupération de l'élément de la voiture dans le tableau de données
   let carElement = dataArray[indiceBrand]["cars"][indiceCarInBrand];
 
+  // Sélection des éléments d'images du slider correspondant à la voiture
   const className = `.slider_${indiceBrand}_${indiceCarInBrand} img`;
-
   let slider = document.querySelectorAll(className);
 
+  // Suppression de la classe 'img-active' de l'image actuelle
   slider[carElement.currentIndexSlide].classList.remove("img-active");
 
+  // Appel de la fonction de changement d'indice de slide et sauvegarde du nouvel indice
   carElement.changeAndSaveNumberOfSlide(pressedButton);
 
+  // Ajout de la classe 'img-active' à la nouvelle image affichée
   slider[carElement.currentIndexSlide].classList.add("img-active");
 }
 
+// Assignation de la fonction swipeImagesOfSlider à la propriété window pour la rendre accessible globalement
 window.swipeImagesOfSlider = swipeImagesOfSlider;
 
+/**
+ * Affiche ou masque la liste des voitures pour une marque donnée en fonction de son identifiant.
+ * @param {number} idBrand - L'identifiant de la marque dont la liste des voitures doit être affichée ou masquée.
+ */
 function showCarListInBrand(idBrand) {
+  // Création de l'identifiant du conteneur de la marque
   const idName = "id_brand_" + idBrand;
 
+  // Récupération de l'élément contenant la liste des voitures de la marque
   var element = document.getElementById(idName);
+
+  // Basculer la classe 'container-car-active' pour afficher ou masquer la liste des voitures
   element.classList.toggle("container-car-active");
-  /*
-  if (element !== null) {
-    if (element.style.display === "grid") {
-      element.style.display = "none";
-    } else {
-      element.style.display = "grid";
-    }
-  }
-*/
+
+  // Création du sélecteur de la classe d'éléments d'images d'ouverture/fermeture
   const className = ".brand_" + idBrand;
   let imgCloseOpen = document.querySelector(className);
 
-  if (imgCloseOpen.length !== null) {
+  // Vérification de l'existence des éléments d'images et bascule de la classe 'brand-img-active' si présents
+  if (imgCloseOpen !== null) {
     let imgElements = imgCloseOpen.querySelectorAll("img");
 
+    // Vérification du nombre d'éléments d'images
     if (imgElements.length === 2) {
-      // Vérifiez s'il y a exactement deux images
-      // Inversez les classes des images
       imgElements[0].classList.toggle("brand-img-active");
       imgElements[1].classList.toggle("brand-img-active");
     }
   }
 }
 
+// Assignation de la fonction showCarListInBrand à la propriété window pour la rendre accessible globalement
 window.showCarListInBrand = showCarListInBrand;
 
 // Décomposer en plusieurs fonction
