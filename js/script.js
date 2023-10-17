@@ -92,17 +92,14 @@ function createInstanceOfCar(data) {
     // Remplace le tableau de voitures d'origine par le nouveau tableau de voitures converties
     data[brand]["cars"] = carListInstance;
     brandArray[brand] = data[brand];
-    //brandArray[brand]["logo"] = data[brand]["logo"];
-    //brandArray[brand]["cars"] = carListInstance;
   }
   return brandArray; // type brand
 }
 
-// CHANGER COMMENTAIRE ORDERLIST
 /**
  * Prend un tableau d'objets de type 'Brand' en entrée
  * et trie le tableau par ordre alphabétique de la marque et des voitures par nom.
- * @param {array} data - Tableau de dictionnaire de type Brand.
+ * @param {Array} data - Tableau de dictionnaire de type Brand.
  */
 function sortData(data) {
   // Trie les données principales par marque (ordre alphabétique)
@@ -115,7 +112,7 @@ function sortData(data) {
 
 /**
  * Trie le tableau de données par marque (ordre alphabétique).
- * @param {array} data - Tableau de dictionnaire de type Brand.
+ * @param {Array} data - Tableau de dictionnaire de type Brand.
  */
 function sortBrand(data) {
   data.sort((a, b) => {
@@ -135,7 +132,7 @@ function sortBrand(data) {
 /**
  * Trie le tableau de voitures d'une marque spécifique par nom (ordre alphabétique).
  * @param {string/number} brand - Marque que l'on souhaite trier.
- * @param {array} data - Tableau de dictionnaire de type Brand.
+ * @param {Array} data - Tableau de dictionnaire de type Brand.
  */
 function sortCarInBrand(brand, data) {
   // Récupère le tableau des voitures de la marque actuelle
@@ -155,29 +152,51 @@ function sortCarInBrand(brand, data) {
   });
 }
 
-async function verifyImagesOfCar(dataArray) {
-  let carImagesArray = new Array();
+/**
+ * Collecte les images des voitures à partir des données d'entrée et les ajoute à un tableau.
+ * @param {Array} carImgsArray - Tableau dans lequel les images de voitures seront stockées.
+ * @param {Array} dataArray - Tableau contenant les données des voitures regroupées par marque.
+ */
+function getImagesOfCar(carImgsArray, dataArray) {
+  // Parcourt les marques et les voitures pour collecter les images des voitures
   for (let brand of dataArray) {
     for (let car of brand.cars) {
-      carImagesArray.push(car.imagesCar);
+      carImgsArray.push(car.imagesCar);
     }
   }
+}
+
+/**
+ * Vérifie de manière asynchrone les images des voitures à l'aide d'un script PHP.
+ * @param {Array} dataArray - Tableau contenant les données des voitures regroupées par marque.
+ */
+async function verifyImagesOfCar(dataArray) {
+  // Crée un tableau pour stocker toutes les images des voitures
+  let carImagesArray = new Array();
+  getImagesOfCar(carImagesArray, dataArray);
+
+  // Convertit le tableau d'images de voiture au format JSON
   let jsonCarImages = JSON.stringify(carImagesArray);
+
+  // Envoie une requête POST au script PHP pour la vérification des images
   await fetch("../php/verify_images.php", {
     method: "POST",
     body: jsonCarImages,
   })
     .then((response) => response.json()) // Récupère le texte de la réponse du script PHP
     .then((data) => {
+      // Traite les données de la réponse
       if (data.error) {
-        console.log(data.error);
+        console.log(data.error); // Journalise les erreurs éventuelles reçues du script PHP
       } else {
         let indexArrayJSON = 0;
+        // Met à jour les images des voitures et les propriétés associées en fonction de la réponse
         for (let brand of dataArray) {
           for (let car of brand.cars) {
             car.imagesCar = data[indexArrayJSON];
             indexArrayJSON++;
             car.maxIndexSlide = car.imagesCar.length - 1;
+            // Définit l'index actuel pour le diaporama d'images, par défaut à 0 s'il n'y a pas d'images disponibles
             if (car.imagesCar.length === 0) {
               car.currentIndexSlide = 0;
             }
@@ -186,7 +205,7 @@ async function verifyImagesOfCar(dataArray) {
       }
     })
     .catch((error) => {
-      console.error("Erreur :" + error.message);
+      console.error("Erreur : " + error.message); // Journalise les erreurs réseau ou de traitement
     });
 }
 
