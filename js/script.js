@@ -428,8 +428,11 @@ function createContainerImageHTML(carObject, indiceBrand, counterCar) {
  * @returns {HTMLElement} - Élément div contenant les informations de la voiture.
  */
 function createDivCar(car, containerImageHTML) {
+  // Crée un élément div avec la classe "table-car"
   const div = document.createElement("div");
   div.setAttribute("class", "table-car");
+
+  // Insère le contenu HTML dans le div
   div.innerHTML = `
     <div class="container-img">
       ${containerImageHTML}
@@ -452,76 +455,6 @@ function createDivCar(car, containerImageHTML) {
 
   return div;
 }
-
-/*
-function createCarList(carList) {
-  // Vérifie si l'objet carList contient des éléments
-  if (Object.keys(carList).length !== 0) {
-    // Chaîne HTML représentant une image par défaut en cas d'absence d'images disponibles
-    let noImagesAvailable = `<img class="img-slide img-active" src="../assets/imgs/catalogue/image_not_available.png">`;
-
-    // Boucle parcourant chaque marque dans l'objet carList
-    for (let brand in carList) {
-      // Crée un élément de div représentant un élément de tableau incluant une section pour la marque et la liste des voitures
-      const divTableItem = createDivTableItem(brand);
-
-      // Crée un élément de div représentant la marque dans le tableau
-      const divTableBrand = createDivTableBrand(carList[brand]);
-
-      // Crée un élément de div représentant le bouton "Voir plus" pour la marque spécifique
-      const divVoirPlus = createDivVoirPlus(brand);
-
-      // Crée un élément de div représentant le conteneur des voitures de la marque
-      const divContainerBrandCar = createDivContainerBrandCar();
-
-      // Crée un élément de div représentant le conteneur des voitures pour la marque spécifique
-      const divContainerCar = createContainerCar(brand);
-
-      let counterOfCar = 0;
-      let containerImageHTML; // Voir c'est quoi le mieux entre le mettre en dehors ou à l'intérieur
-      // Detruis / Assigne nouvelle valeur à chaque tour de boucle
-
-      for (let car of carList[brand]["cars"]) {
-        if (car.imagesCar.length === 0) {
-          containerImageHTML = noImagesAvailable;
-        } else {
-          containerImageHTML = createContainerImageHTML(
-            car,
-            brand,
-            counterOfCar
-          );
-        }
-
-        const divCar = createDivCar(car, containerImageHTML);
-
-        counterOfCar++;
-
-        if (divContainerCar !== null) {
-          divContainerCar.appendChild(divCar);
-        }
-      }
-
-      if (searchResult !== null && divTableItem !== null) {
-        divContainerBrandCar.appendChild(divTableBrand);
-        divContainerBrandCar.appendChild(divContainerCar);
-
-        divTableItem.appendChild(divContainerBrandCar);
-        divTableItem.appendChild(divVoirPlus);
-
-        searchResult.appendChild(divTableItem);
-      }
-    }
-  } else {
-    const divNoResult = document.createElement("div"); // Change with <p> ??
-    divNoResult.setAttribute("class", "table-noresults");
-    divNoResult.innerHTML = `
-      Aucun résultat correspondant à votre recherche.
-    `;
-    if (searchNoResult != null) {
-      searchNoResult.appendChild(divNoResult);
-    }
-  }
-}*/
 
 /**
  * Crée un élément de div représentant un élément de tableau incluant une section pour la marque et la liste des voitures.
