@@ -594,14 +594,20 @@ function createCarElements(cars, brand, divContainerCar) {
  * @param {Array} carList - Liste des voitures pour chaque marque.
  */
 function createCarList(carList) {
+  // Vérifie si l'objet carList contient des éléments
   if (Object.keys(carList).length !== 0) {
+    // Parcourt chaque marque dans l'objet carList et crée un tableau pour la marque
     for (let brand in carList) {
+      // Crée l'élément de tableau pour la marque spécifique
       createTableItem(brand, carList);
     }
   } else {
+    // Crée un élément de div indiquant l'absence de résultats pour la recherche
     const divNoResult = document.createElement("div");
     divNoResult.setAttribute("class", "table-noresults");
     divNoResult.innerHTML = `Aucun résultat correspondant à votre recherche.`;
+
+    // Ajoute l'élément de div à la section des résultats de recherche s'il existe
     if (searchNoResult !== null) {
       searchNoResult.appendChild(divNoResult);
     }
