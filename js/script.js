@@ -369,6 +369,7 @@ function createDivVoirPlus(indiceBrand) {
  * @returns {HTMLDivElement} - L'élément de div créé représentant le conteneur des voitures de la marque.
  */
 function createDivContainerBrandCar() {
+  // Crée un élément div avec la classe "table-container-brand-car"
   const div = document.createElement("div");
   div.setAttribute("class", "table-container-brand-car");
 
@@ -381,6 +382,7 @@ function createDivContainerBrandCar() {
  * @returns {HTMLDivElement} - L'élément de div créé représentant le conteneur des voitures de la marque.
  */
 function createContainerCar(indiceBrand) {
+  // Crée un élément div avec la classe "table-container-car" et l'ID spécifique à la marque
   const div = document.createElement("div");
   div.setAttribute("class", "table-container-car");
   div.setAttribute("id", `id_brand_${indiceBrand}`);
