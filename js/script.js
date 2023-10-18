@@ -421,6 +421,39 @@ function createContainerImageHTML(carObject, indiceBrand, counterCar) {
   return containerImageHTML;
 }
 
+/**
+ * Crée un élément div représentant un élément de tableau contenant les informations d'une voiture.
+ * @param {Object} car - Objet contenant les informations de la voiture.
+ * @param {string} containerImageHTML - HTML représentant le conteneur des images de la voiture.
+ * @returns {HTMLElement} - Élément div contenant les informations de la voiture.
+ */
+function createDivCar(car, containerImageHTML) {
+  const div = document.createElement("div");
+  div.setAttribute("class", "table-car");
+  div.innerHTML = `
+    <div class="container-img">
+      ${containerImageHTML}
+    </div>
+
+    <div class="car-info">
+      <p class="name">${car.brandCar} ${car.nameCar}</p>
+      <p class="price">À partir de [METTRE A PARTIR DE RATE]</p>
+      <div class="car-disponibilite">
+        <img src=${
+          car.availabilityCar
+            ? "../assets/imgs/icone/disponible.png"
+            : "../assets/imgs/icone/non-disponible.png"
+        }>
+        <p>${car.availabilityCar ? "Disponible" : "Non disponible"}</p>
+      </div>
+      <a href="#${car.nameCar}" class="button">En savoir plus →</a>
+    </div>
+  `;
+
+  return div;
+}
+
+/*
 function createCarList(carList) {
   // Vérifie si l'objet carList contient des éléments
   if (Object.keys(carList).length !== 0) {
@@ -446,7 +479,8 @@ function createCarList(carList) {
 
       let counterOfCar = 0;
       let containerImageHTML; // Voir c'est quoi le mieux entre le mettre en dehors ou à l'intérieur
-      // Detruis || Assigne nouvelle valeur à chaque tour de boucle
+      // Detruis / Assigne nouvelle valeur à chaque tour de boucle
+
       for (let car of carList[brand]["cars"]) {
         if (car.imagesCar.length === 0) {
           containerImageHTML = noImagesAvailable;
@@ -458,58 +492,107 @@ function createCarList(carList) {
           );
         }
 
-        const divCar = document.createElement("div");
-        divCar.setAttribute("class", "table-car");
-        divCar.innerHTML = `
-                <div class="container-img">
-                    ${containerImageHTML}
-                </div>
+        const divCar = createDivCar(car, containerImageHTML);
 
-                <div class="car-info">
-                    <p class="name">${car.brandCar} ${car.nameCar}</p>
-                    <p class="price">À partir de [METTRE A PARTIR DE RATE]</p>
-                    <div class="car-disponibilite">
-                        <img src=${
-                          car.availabilityCar
-                            ? "../assets/imgs/icone/disponible.png"
-                            : "../assets/imgs/icone/non-disponible.png"
-                        }>
-                        <p>${
-                          car.availabilityCar ? "available" : "unavailable"
-                        }</p>
-                    </div>
-                    <a href="#${
-                      car.nameCar
-                    }" class="button">En savoir plus →</a>
-                </div>
-                `;
         counterOfCar++;
+
         if (divContainerCar !== null) {
           divContainerCar.appendChild(divCar);
         }
       }
-      if (divTableItem !== null) {
+
+      if (searchResult !== null && divTableItem !== null) {
         divContainerBrandCar.appendChild(divTableBrand);
         divContainerBrandCar.appendChild(divContainerCar);
-        divTableItem.appendChild(divContainerBrandCar);
 
-        /*divTableItem.appendChild(divTableBrand);
-        divTableItem.appendChild(divContainerCar);*/
+        divTableItem.appendChild(divContainerBrandCar);
         divTableItem.appendChild(divVoirPlus);
 
-        if (searchResult !== null) {
-          searchResult.appendChild(divTableItem);
-        }
+        searchResult.appendChild(divTableItem);
       }
     }
   } else {
-    const listItem = document.createElement("div");
-    listItem.setAttribute("class", "table-noresults");
-    listItem.innerHTML = `
-            Aucun résultat correspondant à votre recherche.
-        `;
+    const divNoResult = document.createElement("div"); // Change with <p> ??
+    divNoResult.setAttribute("class", "table-noresults");
+    divNoResult.innerHTML = `
+      Aucun résultat correspondant à votre recherche.
+    `;
     if (searchNoResult != null) {
-      searchNoResult.appendChild(listItem);
+      searchNoResult.appendChild(divNoResult);
+    }
+  }
+}*/
+
+/**
+ * Crée un élément de div représentant un élément de tableau incluant une section pour la marque et la liste des voitures.
+ * @param {string} brand - Nom de la marque.
+ * @param {Object} carList - Liste des voitures pour la marque.
+ */
+function createTableItem(brand, carList) {
+  const divTableItem = createDivTableItem(brand);
+  const divTableBrand = createDivTableBrand(carList[brand]);
+  const divVoirPlus = createDivVoirPlus(brand);
+  const divContainerBrandCar = createDivContainerBrandCar();
+  const divContainerCar = createContainerCar(brand);
+
+  createCarElements(carList[brand]["cars"], brand, divContainerCar);
+
+  if (searchResult !== null && divTableItem !== null) {
+    divContainerBrandCar.appendChild(divTableBrand);
+    divContainerBrandCar.appendChild(divContainerCar);
+    divTableItem.appendChild(divContainerBrandCar);
+    divTableItem.appendChild(divVoirPlus);
+    searchResult.appendChild(divTableItem);
+  }
+}
+
+/**
+ * Crée les éléments de voiture et les ajoute au conteneur de voitures.
+ * @param {Object[]} cars - Liste des voitures pour la marque.
+ * @param {string} brand - Nom de la marque.
+ * @param {HTMLElement} divContainerCar - Élément div du conteneur de voitures.
+ * @returns {number} - Le nombre de voitures ajoutées.
+ */
+function createCarElements(cars, brand, divContainerCar) {
+  let counterOfCar = 0;
+  const noImagesAvailable = `<img class="img-slide img-active" src="../assets/imgs/catalogue/image_not_available.png">`;
+
+  // Parcours de chaque voiture dans la liste
+  for (let car of cars) {
+    // Crée le contenu HTML du conteneur d'images de la voiture
+    const containerImageHTML =
+      car.imagesCar.length === 0
+        ? noImagesAvailable
+        : createContainerImageHTML(car, brand, counterOfCar);
+
+    // Crée l'élément div représentant la voiture
+    const divCar = createDivCar(car, containerImageHTML);
+    counterOfCar++;
+
+    // Ajoute l'élément div de la voiture au conteneur de voitures
+    if (divContainerCar !== null) {
+      divContainerCar.appendChild(divCar);
+    }
+  }
+
+  return counterOfCar;
+}
+
+/**
+ * Crée le tableau des voitures pour chaque marque dans la liste de voitures.
+ * @param {Array} carList - Liste des voitures pour chaque marque.
+ */
+function createCarList(carList) {
+  if (Object.keys(carList).length !== 0) {
+    for (let brand in carList) {
+      createTableItem(brand, carList);
+    }
+  } else {
+    const divNoResult = document.createElement("div");
+    divNoResult.setAttribute("class", "table-noresults");
+    divNoResult.innerHTML = `Aucun résultat correspondant à votre recherche.`;
+    if (searchNoResult !== null) {
+      searchNoResult.appendChild(divNoResult);
     }
   }
 }
