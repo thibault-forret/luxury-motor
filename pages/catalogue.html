@@ -1,158 +1,175 @@
 <!DOCTYPE html>
 <html lang="fr" translate="no">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../css/style-catalogue.css" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../css/style-catalogue.css" rel="stylesheet" />
     <title>Luxury Motor</title>
-    <link rel="icon" type="image/png" sizes="16x16" href="../assets/imgs/logo/logo-icone-jaune-no-bg.png">
-</head>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../assets/imgs/logo/logo-icone-jaune-no-bg.png"
+    />
+  </head>
 
-<body>
+  <body>
     <header>
-        <div class="topnav">
-            <a href="#" id="logo">
-                <img src="../assets/imgs/logo/logo-icone-jaune.png" alt="">
-            </a>
+      <div class="topnav">
+        <a href="#" id="logo">
+          <img src="../assets/imgs/logo/logo-icone-jaune.png" alt="" />
+        </a>
 
-            <a href="javascript:void(0)" onclick="window.showNavbar()">
-                <img src="../assets/imgs/icone/menu-burger-blanc.png" id="burger" alt="">
-            </a>
+        <a href="javascript:void(0)" onclick="window.showNavbar()">
+          <img
+            src="../assets/imgs/icone/menu-burger-blanc.png"
+            id="burger"
+            alt=""
+          />
+        </a>
+      </div>
 
+      <div id="header-div">
+        <div id="header-div-logo">
+          <a href="../accueil.html">
+            <div id="header-logo">
+              <!-- Background Image in CSS -->
+            </div>
+          </a>
         </div>
 
-
-        <div id="header-div">
-            <div id="header-div-logo">
-                <a href="../accueil.html">
-                    <div id="header-logo">
-                        <!-- Background Image in CSS -->
-                    </div>
-                </a>
+        <div id="header-div-navbar">
+          <a href="../index.html">
+            <div class="nav-item" id="nav-item-accueil">
+              <img
+                class="nav-icone"
+                src="../assets/imgs/icone/maison-jaune.png"
+                alt="Accueil"
+              />
+              Accueil
             </div>
-    
-            <div id="header-div-navbar">
-                <a href="../index.html">
-                    <div class="nav-item" id="nav-item-accueil">
-                        <img class="nav-icone" src="../assets/imgs/icone/maison-jaune.png" alt="Accueil">
-                        Accueil
-                    </div>
-                </a>
-                <a href="./catalogue.html">
-                    <div class="nav-item active" id="nav-item-catalogue">
-                        <img class="nav-icone" src="../assets/imgs/icone/panier-blanc.png" alt="Catalogue">
-                        Catalogue
-                    </div>
-                </a>
-                <a href="../index.html">
-                    <div class="nav-item" id="nav-item-reservation">
-                        <img class="nav-icone" src="../assets/imgs/icone/calendrier-jaune.png" alt="Reservation">
-                        Reservation
-                    </div>
-                </a>
-                <a href="./contact.html">
-                    <div class="nav-item" id="nav-item-contact">
-                        <img class="nav-icone" src="../assets/imgs/icone/enveloppe-jaune.png" alt="Contact">
-                        Contact
-                    </div>
-                </a>
+          </a>
+          <a href="./catalogue.html">
+            <div class="nav-item active" id="nav-item-catalogue">
+              <img
+                class="nav-icone"
+                src="../assets/imgs/icone/panier-blanc.png"
+                alt="Catalogue"
+              />
+              Catalogue
             </div>
+          </a>
+          <a href="../index.html">
+            <div class="nav-item" id="nav-item-reservation">
+              <img
+                class="nav-icone"
+                src="../assets/imgs/icone/calendrier-jaune.png"
+                alt="Reservation"
+              />
+              Reservation
+            </div>
+          </a>
+          <a href="./contact.html">
+            <div class="nav-item" id="nav-item-contact">
+              <img
+                class="nav-icone"
+                src="../assets/imgs/icone/enveloppe-jaune.png"
+                alt="Contact"
+              />
+              Contact
+            </div>
+          </a>
         </div>
+      </div>
     </header>
 
     <div id="links">
-        <div id="in-links">
-            <a href="../accueil.html">Accueil</a>
-            <a href="./catalogue.html" class="active">Catalogue</a>
-            <a href="../accueil.html">Réservation</a>
-            <a href="./a-propos.html">À propos de nous</a>
-            <a href="./mentionlegales.html">Mentions Légales</a>
-            <a href="./contact.html">Contact</a>
-        </div>
+      <div id="in-links">
+        <a href="../accueil.html">Accueil</a>
+        <a href="./catalogue.html" class="active">Catalogue</a>
+        <a href="../accueil.html">Réservation</a>
+        <a href="./a-propos.html">À propos de nous</a>
+        <a href="./mentionlegales.html">Mentions Légales</a>
+        <a href="./contact.html">Contact</a>
+      </div>
     </div>
 
     <div class="max-w">
-
-        <div class="search-section">
-
-            <div class="input-control">
-
-                <label for="search">
-                    <img src="../assets/imgs/icone/chercher-blanc.png">
-                    </label>
-                    <input type="text" id="search" placeholder="Rechercher une voiture...">
-                    
-                </div>
-                
-                <div class="table-results"> <!-- JS --> </div>
-
-                <div class="table-no-results"> <!-- JS --> </div>
-                
-            </div>
-
+      <div class="search-section">
+        <div class="input-control">
+          <label for="search">
+            <img src="../assets/imgs/icone/chercher-blanc.png" />
+          </label>
+          <input
+            type="text"
+            id="search"
+            placeholder="Rechercher une voiture..."
+          />
         </div>
 
+        <div class="table-results"><!-- JS --></div>
+
+        <div class="table-no-results"><!-- JS --></div>
+      </div>
     </div>
 
     <footer class="border-t">
-
-        <div class="max-w">
-
-            <div id="footer-under-logo">
-                <a href="../accueil.html">
-                    <div id="footer-logo">
-                        <!-- Logo Luxury Motor Background Image-->
-                    </div>
-                </a>
+      <div class="max-w">
+        <div id="footer-under-logo">
+          <a href="../accueil.html">
+            <div id="footer-logo">
+              <!-- Logo Luxury Motor Background Image-->
             </div>
-
-            <div id="footer-nav">
-
-                <a href="./a-propos.html">
-                    <div class="footer-item-nav">
-                        À propos de nous
-                    </div>
-                </a>
-
-                <a href="./contact.html">
-                    <div class="footer-item-nav">
-                        Contact
-                    </div>
-                </a>
-
-                <a href="./mentionlegales.html">
-                    <div class="footer-item-nav">
-                        Mentions Légales
-                    </div>
-                </a>
-
-            </div>
-
-            <div id="footer-coordonnee">
-
-                <div class="footer-item-coordonnee">
-                    <img class="footer-image-coordonnee" src="../assets/imgs/icone/email-jaune.png" alt="Email">
-                    info@luxurymotor.com
-                </div>
-
-                <div class="footer-item-coordonnee">
-                    <img class="footer-image-coordonnee" src="../assets/imgs/icone/localisation-jaune.png" alt="Localisation"> 
-                    Avenue des Facultés,<br>
-                    Le Bailly, 80025 Amiens
-                </div>
-
-                <div class="footer-item-coordonnee">
-                    <img class="footer-image-coordonnee" src="../assets/imgs/icone/telephone-jaune.png" alt="Telephone">
-                    Fixe : 03 22 53 40 40
-                </div>
-
-            </div>
-
-            <div id="footer-copyright-t">
-                ©  2022 by Luxury Motor
-            </div>
+          </a>
         </div>
+
+        <div id="footer-nav">
+          <a href="./a-propos.html">
+            <div class="footer-item-nav">À propos de nous</div>
+          </a>
+
+          <a href="./contact.html">
+            <div class="footer-item-nav">Contact</div>
+          </a>
+
+          <a href="./mentionlegales.html">
+            <div class="footer-item-nav">Mentions Légales</div>
+          </a>
+        </div>
+
+        <div id="footer-coordonnee">
+          <div class="footer-item-coordonnee">
+            <img
+              class="footer-image-coordonnee"
+              src="../assets/imgs/icone/email-jaune.png"
+              alt="Email"
+            />
+            info@luxurymotor.com
+          </div>
+
+          <div class="footer-item-coordonnee">
+            <img
+              class="footer-image-coordonnee"
+              src="../assets/imgs/icone/localisation-jaune.png"
+              alt="Localisation"
+            />
+            Avenue des Facultés,<br />
+            Le Bailly, 80025 Amiens
+          </div>
+
+          <div class="footer-item-coordonnee">
+            <img
+              class="footer-image-coordonnee"
+              src="../assets/imgs/icone/telephone-jaune.png"
+              alt="Telephone"
+            />
+            Fixe : 03 22 53 40 40
+          </div>
+        </div>
+
+        <div id="footer-copyright-t">© 2022 by Luxury Motor</div>
+      </div>
     </footer>
 
     <!--
@@ -160,7 +177,5 @@
     -->
     <script type="module" src="../js/script.js"></script>
     <script src="../js/swipe.js"></script>
-    
-</body>
-
+  </body>
 </html>
