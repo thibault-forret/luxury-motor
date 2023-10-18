@@ -607,11 +607,19 @@ function filterData(elementInput) {
   createCarList(filteredArray);
 }
 
+/**
+ * Affiche ou masque la barre de navigation en basculant la classe "active" de l'élément avec l'ID "links".
+ * Si la classe "active" est présente, elle est supprimée, sinon elle est ajoutée.
+ */
 function showNavbar() {
+  // Récupère l'élément avec l'ID "links"
   var element = document.getElementById("links");
+  // Vérifie si l'élément existe
   if (element !== null) {
+    // Bascule la classe "active" de l'élément
     element.classList.toggle("active");
   }
 }
 
+// Associe la fonction "showNavbar" à la propriété "showNavbar" de l'objet global "window"
 window.showNavbar = showNavbar;
