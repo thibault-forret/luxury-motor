@@ -529,14 +529,25 @@ function createCarList(carList) {
  * @param {Object} carList - Liste des voitures pour la marque.
  */
 function createTableItem(brand, carList) {
+  // Crée un élément de div représentant l'élément de tableau
   const divTableItem = createDivTableItem(brand);
+
+  // Crée un élément de div représentant la marque dans le tableau
   const divTableBrand = createDivTableBrand(carList[brand]);
+
+  // Crée un élément de div représentant le bouton "Voir plus" pour la marque spécifique
   const divVoirPlus = createDivVoirPlus(brand);
+
+  // Crée un élément de div représentant le conteneur des voitures de la marque
   const divContainerBrandCar = createDivContainerBrandCar();
+
+  // Crée un élément de div représentant le conteneur des voitures pour la marque spécifique
   const divContainerCar = createContainerCar(brand);
 
+  // Crée les éléments de voiture et les ajoute au conteneur de voitures
   createCarElements(carList[brand]["cars"], brand, divContainerCar);
 
+  // Ajoute les éléments créés à l'élément de tableau
   if (searchResult !== null && divTableItem !== null) {
     divContainerBrandCar.appendChild(divTableBrand);
     divContainerBrandCar.appendChild(divContainerCar);
