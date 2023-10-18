@@ -610,11 +610,7 @@ function filterData(elementInput) {
 function showNavbar() {
   var element = document.getElementById("links");
   if (element !== null) {
-    if (element.style.display == "block") {
-      element.style.display = "none";
-    } else {
-      element.style.display = "block";
-    }
+    element.classList.toggle("active");
   }
 }
 
