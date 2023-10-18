@@ -369,6 +369,7 @@ function createDivVoirPlus(indiceBrand) {
  * @returns {HTMLDivElement} - L'élément de div créé représentant le conteneur des voitures de la marque.
  */
 function createDivContainerBrandCar() {
+  // Crée un élément div avec la classe "table-container-brand-car"
   const div = document.createElement("div");
   div.setAttribute("class", "table-container-brand-car");
 
@@ -381,6 +382,7 @@ function createDivContainerBrandCar() {
  * @returns {HTMLDivElement} - L'élément de div créé représentant le conteneur des voitures de la marque.
  */
 function createContainerCar(indiceBrand) {
+  // Crée un élément div avec la classe "table-container-car" et l'ID spécifique à la marque
   const div = document.createElement("div");
   div.setAttribute("class", "table-container-car");
   div.setAttribute("id", `id_brand_${indiceBrand}`);
@@ -421,110 +423,154 @@ function createContainerImageHTML(carObject, indiceBrand, counterCar) {
   return containerImageHTML;
 }
 
+/**
+ * Crée un élément div représentant un élément de tableau contenant les informations d'une voiture.
+ * @param {Object} car - Objet contenant les informations de la voiture.
+ * @param {string} containerImageHTML - HTML représentant le conteneur des images de la voiture.
+ * @returns {HTMLElement} - Élément div contenant les informations de la voiture.
+ */
+function createDivCar(car, containerImageHTML) {
+  // Crée un élément div avec la classe "table-car"
+  const div = document.createElement("div");
+  div.setAttribute("class", "table-car");
+
+  // Insère le contenu HTML dans le div
+  div.innerHTML = `
+    <div class="container-img">
+      ${containerImageHTML}
+    </div>
+
+    <div class="car-info">
+      <p class="name">${car.brandCar} ${car.nameCar}</p>
+      <p class="price">À partir de [METTRE A PARTIR DE RATE]</p>
+      <div class="car-disponibilite">
+        <img src=${
+          car.availabilityCar
+            ? "../assets/imgs/icone/disponible.png"
+            : "../assets/imgs/icone/non-disponible.png"
+        }>
+        <p>${car.availabilityCar ? "Disponible" : "Non disponible"}</p>
+      </div>
+      <a href="#${car.nameCar}" class="button">En savoir plus →</a>
+    </div>
+  `;
+
+  return div;
+}
+
+/**
+ * Crée un élément de div représentant un élément de tableau incluant une section pour la marque et la liste des voitures.
+ * @param {string} brand - Nom de la marque.
+ * @param {Object} carList - Liste des voitures pour la marque.
+ */
+function createTableItem(brand, carList) {
+  // Crée un élément de div représentant l'élément de tableau
+  const divTableItem = createDivTableItem(brand);
+
+  // Crée un élément de div représentant la marque dans le tableau
+  const divTableBrand = createDivTableBrand(carList[brand]);
+
+  // Crée un élément de div représentant le bouton "Voir plus" pour la marque spécifique
+  const divVoirPlus = createDivVoirPlus(brand);
+
+  // Crée un élément de div représentant le conteneur des voitures de la marque
+  const divContainerBrandCar = createDivContainerBrandCar();
+
+  // Crée un élément de div représentant le conteneur des voitures pour la marque spécifique
+  const divContainerCar = createContainerCar(brand);
+
+  // Crée les éléments de voiture et les ajoute au conteneur de voitures
+  createCarElements(carList[brand]["cars"], brand, divContainerCar);
+
+  // Ajoute les éléments créés à l'élément de tableau
+  if (searchResult !== null && divTableItem !== null) {
+    divContainerBrandCar.appendChild(divTableBrand);
+    divContainerBrandCar.appendChild(divContainerCar);
+    divTableItem.appendChild(divContainerBrandCar);
+    divTableItem.appendChild(divVoirPlus);
+    searchResult.appendChild(divTableItem);
+  }
+}
+
+/**
+ * Crée les éléments de voiture et les ajoute au conteneur de voitures.
+ * @param {Object[]} cars - Liste des voitures pour la marque.
+ * @param {string} brand - Nom de la marque.
+ * @param {HTMLElement} divContainerCar - Élément div du conteneur de voitures.
+ * @returns {number} - Le nombre de voitures ajoutées.
+ */
+function createCarElements(cars, brand, divContainerCar) {
+  let counterOfCar = 0;
+  const noImagesAvailable = `<img class="img-slide img-active" src="../assets/imgs/catalogue/image_not_available.png">`;
+
+  // Parcours de chaque voiture dans la liste
+  for (let car of cars) {
+    // Crée le contenu HTML du conteneur d'images de la voiture
+    const containerImageHTML =
+      car.imagesCar.length === 0
+        ? noImagesAvailable
+        : createContainerImageHTML(car, brand, counterOfCar);
+
+    // Crée l'élément div représentant la voiture
+    const divCar = createDivCar(car, containerImageHTML);
+    counterOfCar++;
+
+    // Ajoute l'élément div de la voiture au conteneur de voitures
+    if (divContainerCar !== null) {
+      divContainerCar.appendChild(divCar);
+    }
+  }
+
+  return counterOfCar;
+}
+
+/**
+ * Crée le tableau des voitures pour chaque marque dans la liste de voitures.
+ * @param {Array} carList - Liste des voitures pour chaque marque.
+ */
 function createCarList(carList) {
   // Vérifie si l'objet carList contient des éléments
   if (Object.keys(carList).length !== 0) {
-    // Chaîne HTML représentant une image par défaut en cas d'absence d'images disponibles
-    let noImagesAvailable = `<img class="img-slide img-active" src="../assets/imgs/catalogue/image_not_available.png">`;
-
-    // Boucle parcourant chaque marque dans l'objet carList
+    // Parcourt chaque marque dans l'objet carList et crée un tableau pour la marque
     for (let brand in carList) {
-      // Crée un élément de div représentant un élément de tableau incluant une section pour la marque et la liste des voitures
-      const divTableItem = createDivTableItem(brand);
-
-      // Crée un élément de div représentant la marque dans le tableau
-      const divTableBrand = createDivTableBrand(carList[brand]);
-
-      // Crée un élément de div représentant le bouton "Voir plus" pour la marque spécifique
-      const divVoirPlus = createDivVoirPlus(brand);
-
-      // Crée un élément de div représentant le conteneur des voitures de la marque
-      const divContainerBrandCar = createDivContainerBrandCar();
-
-      // Crée un élément de div représentant le conteneur des voitures pour la marque spécifique
-      const divContainerCar = createContainerCar(brand);
-
-      let counterOfCar = 0;
-      let containerImageHTML; // Voir c'est quoi le mieux entre le mettre en dehors ou à l'intérieur
-      // Detruis || Assigne nouvelle valeur à chaque tour de boucle
-      for (let car of carList[brand]["cars"]) {
-        if (car.imagesCar.length === 0) {
-          containerImageHTML = noImagesAvailable;
-        } else {
-          containerImageHTML = createContainerImageHTML(
-            car,
-            brand,
-            counterOfCar
-          );
-        }
-
-        const divCar = document.createElement("div");
-        divCar.setAttribute("class", "table-car");
-        divCar.innerHTML = `
-                <div class="container-img">
-                    ${containerImageHTML}
-                </div>
-
-                <div class="car-info">
-                    <p class="name">${car.brandCar} ${car.nameCar}</p>
-                    <p class="price">À partir de [METTRE A PARTIR DE RATE]</p>
-                    <div class="car-disponibilite">
-                        <img src=${
-                          car.availabilityCar
-                            ? "../assets/imgs/icone/disponible.png"
-                            : "../assets/imgs/icone/non-disponible.png"
-                        }>
-                        <p>${
-                          car.availabilityCar ? "available" : "unavailable"
-                        }</p>
-                    </div>
-                    <a href="#${
-                      car.nameCar
-                    }" class="button">En savoir plus →</a>
-                </div>
-                `;
-        counterOfCar++;
-        if (divContainerCar !== null) {
-          divContainerCar.appendChild(divCar);
-        }
-      }
-      if (divTableItem !== null) {
-        divContainerBrandCar.appendChild(divTableBrand);
-        divContainerBrandCar.appendChild(divContainerCar);
-        divTableItem.appendChild(divContainerBrandCar);
-
-        /*divTableItem.appendChild(divTableBrand);
-        divTableItem.appendChild(divContainerCar);*/
-        divTableItem.appendChild(divVoirPlus);
-
-        if (searchResult !== null) {
-          searchResult.appendChild(divTableItem);
-        }
-      }
+      // Crée l'élément de tableau pour la marque spécifique
+      createTableItem(brand, carList);
     }
   } else {
-    const listItem = document.createElement("div");
-    listItem.setAttribute("class", "table-noresults");
-    listItem.innerHTML = `
-            Aucun résultat correspondant à votre recherche.
-        `;
-    if (searchNoResult != null) {
-      searchNoResult.appendChild(listItem);
+    // Crée un élément de div indiquant l'absence de résultats pour la recherche
+    const divNoResult = document.createElement("div");
+    divNoResult.setAttribute("class", "table-noresults");
+    divNoResult.innerHTML = `Aucun résultat correspondant à votre recherche.`;
+
+    // Ajoute l'élément de div à la section des résultats de recherche s'il existe
+    if (searchNoResult !== null) {
+      searchNoResult.appendChild(divNoResult);
     }
   }
 }
 
-// Vérifie si l'élément DOM avec l'ID 'searchInput' existe
-if (searchInput != null) {
-  // Si 'searchInput' existe, ajoute un écouteur d'événement 'input' qui
-  // déclenchera la fonction 'filterData' lorsqu'un utilisateur saisit dans l'input.
-  searchInput.addEventListener("input", filterData);
+/**
+ * Initialise l'écouteur d'événement pour le champ de recherche.
+ * Si l'élément DOM avec l'ID 'searchInput' existe, ajoute un écouteur d'événement 'input' qui
+ * déclenchera la fonction 'filterData' lorsqu'un utilisateur saisit dans l'input.
+ * @throws {Error} Lance une erreur si 'searchInput' est null.
+ */
+function initializeSearchListener() {
+  // Vérifie si l'élément DOM avec l'ID 'searchInput' existe
+  if (searchInput !== null) {
+    // Si 'searchInput' existe, ajoute un écouteur d'événement 'input'
+    // pour déclencher la fonction 'filterData' lors de la saisie de l'utilisateur.
+    searchInput.addEventListener("input", filterData);
+  } else {
+    // Si 'searchInput' n'existe pas, affiche un message d'erreur dans la console.
+    console.error("searchInput est null.");
+  }
 }
 
-// Définition de la fonction 'filterData' qui sera appelée en réponse à l'événement 'input'
 /**
- * Fonction permettant de filtrer les résultats en fonction d'un texte entré.
- * @param elementInput - Contient des informations sur l'événement lui-même
+ * Fonction de filtrage des résultats en fonction du texte saisi par l'utilisateur.
+ * @param {Event} elementInput - L'objet contenant des informations sur l'événement 'input'.
+ * @throws {Error} Lance une erreur si 'searchResult' ou 'searchNoResult' est null.
  */
 function filterData(elementInput) {
   // Vérifie si les éléments DOM avec les ID 'searchResult' et 'searchNoResult' existent
@@ -533,54 +579,78 @@ function filterData(elementInput) {
     searchResult.innerHTML = "";
     searchNoResult.innerHTML = "";
   } else {
-    // Si l'un des éléments n'existe pas, lance une erreur avec un message.
-    throw new Error("searchResult or searchNoResult null");
+    // Si l'un des éléments n'existe pas, affiche un message d'erreur dans la console.
+    console.error("searchResult ou searchNoResult est null.");
+    return; // Sort de la fonction si les éléments nécessaires sont manquants.
   }
+
   // Récupère la chaîne saisie par l'utilisateur, convertit en minuscules et supprime les espaces blancs
   const searchedString = elementInput.target.value
     .toLowerCase()
     .replace(/\s/g, "");
+
   // Crée une copie de dataArray (tableau d'objets Brand)
   let filteredArray = dataArray.map((element) => ({
     brand: element.brand,
     logo: element.logo,
     cars: element.cars,
   }));
-  // Parcourt chaque objet Brand dans 'filteredArray'
+
+  // Parcourt chaque objet Brand dans 'filteredArray' pour filtrer les voitures
   for (let brand of filteredArray) {
     // Filtre le tableau 'cars' de chaque objet Brand en fonction de la chaîne de recherche
-    brand["cars"] = brand["cars"].filter(
-      (car) =>
-        car.nameCar.toLowerCase().includes(searchedString) ||
-        car.brandCar.toLowerCase().includes(searchedString) ||
-        `${car.brandCar + car.nameCar}`
-          .toLowerCase()
-          .replace(/\s/g, "")
-          .includes(searchedString) ||
-        `${car.nameCar + car.brandCar}`
-          .toLowerCase()
-          .replace(/\s/g, "")
-          .includes(searchedString) ||
-        `${car.fullNameCar}`
-          .toLowerCase()
-          .replace(/\s/g, "")
-          .includes(searchedString)
-    );
+    filterCarOfBrand(brand, searchedString);
   }
+
+  // Filtre les marques qui n'ont pas de voitures correspondant à la recherche
   filteredArray = filteredArray.filter((brand) => brand["cars"].length !== 0);
+
   // Appelle une fonction 'createCarList' avec le tableau 'filteredArray' filtré comme argument
   createCarList(filteredArray);
 }
 
+/**
+ * Filtrage des voitures d'une marque en fonction de la chaîne de recherche.
+ * @param {Object} brand - Objet représentant la marque avec son nom, son logo et la liste de ses voitures.
+ * @param {string} searchedString - Chaîne de recherche saisie par l'utilisateur, convertie en minuscules et sans espaces.
+ */
+function filterCarOfBrand(brand, searchedString) {
+  // Filtre le tableau 'cars' de la marque en fonction de la chaîne de recherche
+  brand["cars"] = brand["cars"].filter(
+    (car) =>
+      car.nameCar.toLowerCase().includes(searchedString) || // Vérifie le nom de la voiture
+      car.brandCar.toLowerCase().includes(searchedString) || // Vérifie la marque de la voiture
+      `${car.brandCar + car.nameCar}` // Vérifie la combinaison de la marque et du nom de la voiture
+        .toLowerCase()
+        .replace(/\s/g, "")
+        .includes(searchedString) ||
+      `${car.nameCar + car.brandCar}` // Vérifie la combinaison du nom et de la marque de la voiture
+        .toLowerCase()
+        .replace(/\s/g, "")
+        .includes(searchedString) ||
+      `${car.fullNameCar}` // Vérifie le nom complet de la voiture
+        .toLowerCase()
+        .replace(/\s/g, "")
+        .includes(searchedString)
+  );
+}
+
+// Initialise l'écouteur d'événement pour le champ de recherche
+initializeSearchListener();
+
+/**
+ * Affiche ou masque la barre de navigation en basculant la classe "active" de l'élément avec l'ID "links".
+ * Si la classe "active" est présente, elle est supprimée, sinon elle est ajoutée.
+ */
 function showNavbar() {
+  // Récupère l'élément avec l'ID "links"
   var element = document.getElementById("links");
+  // Vérifie si l'élément existe
   if (element !== null) {
-    if (element.style.display == "block") {
-      element.style.display = "none";
-    } else {
-      element.style.display = "block";
-    }
+    // Bascule la classe "active" de l'élément
+    element.classList.toggle("active");
   }
 }
 
+// Associe la fonction "showNavbar" à la propriété "showNavbar" de l'objet global "window"
 window.showNavbar = showNavbar;
