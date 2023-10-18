@@ -58,6 +58,7 @@ div {
 
 header {
   position: fixed;
+  z-index: 1000;
   top: 0;
   margin: 0;
   width: 100%;
@@ -364,6 +365,7 @@ img.brand-img-active {
 .container-img img {
   width: 100%;
   max-width: 450px;
+  animation: fade 0.5s;
 }
 
 .container-img .angle {
@@ -386,7 +388,6 @@ img.brand-img-active {
 
 img.img-active {
   display: block;
-  animation: fade 0.7s;
 }
 
 @keyframes fade {
