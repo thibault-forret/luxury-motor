@@ -549,17 +549,28 @@ function createCarList(carList) {
   }
 }
 
-// Vérifie si l'élément DOM avec l'ID 'searchInput' existe
-if (searchInput != null) {
-  // Si 'searchInput' existe, ajoute un écouteur d'événement 'input' qui
-  // déclenchera la fonction 'filterData' lorsqu'un utilisateur saisit dans l'input.
-  searchInput.addEventListener("input", filterData);
+/**
+ * Initialise l'écouteur d'événement pour le champ de recherche.
+ * Si l'élément DOM avec l'ID 'searchInput' existe, ajoute un écouteur d'événement 'input' qui
+ * déclenchera la fonction 'filterData' lorsqu'un utilisateur saisit dans l'input.
+ * @throws {Error} Lance une erreur si 'searchInput' est null.
+ */
+function initializeSearchListener() {
+  // Vérifie si l'élément DOM avec l'ID 'searchInput' existe
+  if (searchInput !== null) {
+    // Si 'searchInput' existe, ajoute un écouteur d'événement 'input'
+    // pour déclencher la fonction 'filterData' lors de la saisie de l'utilisateur.
+    searchInput.addEventListener("input", filterData);
+  } else {
+    // Si 'searchInput' n'existe pas, affiche un message d'erreur dans la console.
+    console.error("searchInput est null.");
+  }
 }
 
-// Définition de la fonction 'filterData' qui sera appelée en réponse à l'événement 'input'
 /**
- * Fonction permettant de filtrer les résultats en fonction d'un texte entré.
- * @param elementInput - Contient des informations sur l'événement lui-même
+ * Fonction de filtrage des résultats en fonction du texte saisi par l'utilisateur.
+ * @param {Event} elementInput - L'objet contenant des informations sur l'événement 'input'.
+ * @throws {Error} Lance une erreur si 'searchResult' ou 'searchNoResult' est null.
  */
 function filterData(elementInput) {
   // Vérifie si les éléments DOM avec les ID 'searchResult' et 'searchNoResult' existent
@@ -568,44 +579,64 @@ function filterData(elementInput) {
     searchResult.innerHTML = "";
     searchNoResult.innerHTML = "";
   } else {
-    // Si l'un des éléments n'existe pas, lance une erreur avec un message.
-    throw new Error("searchResult or searchNoResult null");
+    // Si l'un des éléments n'existe pas, affiche un message d'erreur dans la console.
+    console.error("searchResult ou searchNoResult est null.");
+    return; // Sort de la fonction si les éléments nécessaires sont manquants.
   }
+
   // Récupère la chaîne saisie par l'utilisateur, convertit en minuscules et supprime les espaces blancs
   const searchedString = elementInput.target.value
     .toLowerCase()
     .replace(/\s/g, "");
+
   // Crée une copie de dataArray (tableau d'objets Brand)
   let filteredArray = dataArray.map((element) => ({
     brand: element.brand,
     logo: element.logo,
     cars: element.cars,
   }));
-  // Parcourt chaque objet Brand dans 'filteredArray'
+
+  // Parcourt chaque objet Brand dans 'filteredArray' pour filtrer les voitures
   for (let brand of filteredArray) {
     // Filtre le tableau 'cars' de chaque objet Brand en fonction de la chaîne de recherche
-    brand["cars"] = brand["cars"].filter(
-      (car) =>
-        car.nameCar.toLowerCase().includes(searchedString) ||
-        car.brandCar.toLowerCase().includes(searchedString) ||
-        `${car.brandCar + car.nameCar}`
-          .toLowerCase()
-          .replace(/\s/g, "")
-          .includes(searchedString) ||
-        `${car.nameCar + car.brandCar}`
-          .toLowerCase()
-          .replace(/\s/g, "")
-          .includes(searchedString) ||
-        `${car.fullNameCar}`
-          .toLowerCase()
-          .replace(/\s/g, "")
-          .includes(searchedString)
-    );
+    filterCarOfBrand(brand, searchedString);
   }
+
+  // Filtre les marques qui n'ont pas de voitures correspondant à la recherche
   filteredArray = filteredArray.filter((brand) => brand["cars"].length !== 0);
+
   // Appelle une fonction 'createCarList' avec le tableau 'filteredArray' filtré comme argument
   createCarList(filteredArray);
 }
+
+/**
+ * Filtrage des voitures d'une marque en fonction de la chaîne de recherche.
+ * @param {Object} brand - Objet représentant la marque avec son nom, son logo et la liste de ses voitures.
+ * @param {string} searchedString - Chaîne de recherche saisie par l'utilisateur, convertie en minuscules et sans espaces.
+ */
+function filterCarOfBrand(brand, searchedString) {
+  // Filtre le tableau 'cars' de la marque en fonction de la chaîne de recherche
+  brand["cars"] = brand["cars"].filter(
+    (car) =>
+      car.nameCar.toLowerCase().includes(searchedString) || // Vérifie le nom de la voiture
+      car.brandCar.toLowerCase().includes(searchedString) || // Vérifie la marque de la voiture
+      `${car.brandCar + car.nameCar}` // Vérifie la combinaison de la marque et du nom de la voiture
+        .toLowerCase()
+        .replace(/\s/g, "")
+        .includes(searchedString) ||
+      `${car.nameCar + car.brandCar}` // Vérifie la combinaison du nom et de la marque de la voiture
+        .toLowerCase()
+        .replace(/\s/g, "")
+        .includes(searchedString) ||
+      `${car.fullNameCar}` // Vérifie le nom complet de la voiture
+        .toLowerCase()
+        .replace(/\s/g, "")
+        .includes(searchedString)
+  );
+}
+
+// Initialise l'écouteur d'événement pour le champ de recherche
+initializeSearchListener();
 
 /**
  * Affiche ou masque la barre de navigation en basculant la classe "active" de l'élément avec l'ID "links".
