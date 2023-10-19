@@ -655,11 +655,19 @@ function showNavbar() {
 // Associe la fonction "showNavbar" à la propriété "showNavbar" de l'objet global "window"
 window.showNavbar = showNavbar;
 
+// Sélection des éléments d'entrée de prix min et max du DOM
 const minPriceInput = document.querySelector("#min-price-input");
 const maxPriceInput = document.querySelector("#max-price-input");
 
+/**
+ * Initialise les écouteurs d'événements pour les champs de prix min et max.
+ * Les événements incluent "input" pour filtrer les caractères non numériques
+ * et "blur" pour vérifier et échanger les valeurs si nécessaire.
+ */
 function initializeMinMaxPriceListener() {
+  // Vérifie si les éléments minPriceInput et maxPriceInput existent dans le DOM
   if (minPriceInput !== null && maxPriceInput !== null) {
+    // Ajoute un écouteur d'événement "input" pour filtrer les caractères non numériques
     maxPriceInput.addEventListener("input", function () {
       // Remplace tout caractère qui n'est pas un chiffre par une chaîne vide
       this.value = this.value.replace(/\D/g, "");
@@ -668,21 +676,31 @@ function initializeMinMaxPriceListener() {
       // Remplace tout caractère qui n'est pas un chiffre par une chaîne vide
       this.value = this.value.replace(/\D/g, "");
     });
+    // Ajoute un écouteur d'événement "blur" pour vérifier et échanger les valeurs si nécessaire
     minPriceInput.addEventListener("blur", checkControl);
     maxPriceInput.addEventListener("blur", checkControl);
   } else {
+    // Affiche un message d'erreur dans la console si minPriceInput ou maxPriceInput est null
     console.error("minPriceInput / maxPriceInput est null.");
   }
 }
 
+/**
+ * Vérifie les valeurs des champs de prix min et max.
+ * Si la valeur de min est supérieure à celle de max, échange les valeurs.
+ */
 function checkControl() {
+  // Convertit les valeurs en nombres entiers
   const minValue = parseInt(minPriceInput.value);
   const maxValue = parseInt(maxPriceInput.value);
 
+  // Vérifie si la valeur de min est supérieure à celle de max
   if (minValue > maxValue) {
+    // Échange les valeurs des champs de prix min et max
     minPriceInput.value = maxValue;
     maxPriceInput.value = minValue;
   }
 }
 
+// Initialise les écouteurs d'événements pour les champs de prix min et max
 initializeMinMaxPriceListener();
