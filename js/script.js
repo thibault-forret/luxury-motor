@@ -668,24 +668,14 @@ function initializeMinMaxPriceListener() {
       // Remplace tout caractère qui n'est pas un chiffre par une chaîne vide
       this.value = this.value.replace(/\D/g, "");
     });
-    minPriceInput.addEventListener("blur", checkMin);
-    maxPriceInput.addEventListener("blur", checkMax);
+    minPriceInput.addEventListener("blur", checkControl);
+    maxPriceInput.addEventListener("blur", checkControl);
   } else {
     console.error("minPriceInput / maxPriceInput est null.");
   }
 }
 
-function checkMin() {
-  const minValue = parseInt(minPriceInput.value);
-  const maxValue = parseInt(maxPriceInput.value);
-
-  if (minValue > maxValue) {
-    minPriceInput.value = maxValue;
-    maxPriceInput.value = minValue;
-  }
-}
-
-function checkMax() {
+function checkControl() {
   const minValue = parseInt(minPriceInput.value);
   const maxValue = parseInt(maxPriceInput.value);
 
