@@ -654,3 +654,45 @@ function showNavbar() {
 
 // Associe la fonction "showNavbar" à la propriété "showNavbar" de l'objet global "window"
 window.showNavbar = showNavbar;
+
+const minPriceInput = document.querySelector("#min-price-input");
+const maxPriceInput = document.querySelector("#max-price-input");
+
+function initializeMinMaxPriceListener() {
+  if (minPriceInput !== null && maxPriceInput !== null) {
+    maxPriceInput.addEventListener("input", function () {
+      // Remplace tout caractère qui n'est pas un chiffre par une chaîne vide
+      this.value = this.value.replace(/\D/g, "");
+    });
+    minPriceInput.addEventListener("input", function () {
+      // Remplace tout caractère qui n'est pas un chiffre par une chaîne vide
+      this.value = this.value.replace(/\D/g, "");
+    });
+    minPriceInput.addEventListener("blur", checkMin);
+    maxPriceInput.addEventListener("blur", checkMax);
+  } else {
+    console.error("minPriceInput / maxPriceInput est null.");
+  }
+}
+
+function checkMin() {
+  const minValue = parseInt(minPriceInput.value);
+  const maxValue = parseInt(maxPriceInput.value);
+
+  if (minValue > maxValue) {
+    minPriceInput.value = maxValue;
+    maxPriceInput.value = minValue;
+  }
+}
+
+function checkMax() {
+  const minValue = parseInt(minPriceInput.value);
+  const maxValue = parseInt(maxPriceInput.value);
+
+  if (minValue > maxValue) {
+    minPriceInput.value = maxValue;
+    maxPriceInput.value = minValue;
+  }
+}
+
+initializeMinMaxPriceListener();

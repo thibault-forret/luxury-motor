@@ -97,15 +97,89 @@
 
     <div class="max-w">
       <div class="search-section">
-        <div class="input-control">
-          <label for="search">
-            <img src="../assets/imgs/icone/chercher-blanc.png" />
-          </label>
-          <input
-            type="text"
-            id="search"
-            placeholder="Rechercher une voiture..."
-          />
+        <div class="filter-data">
+          <div class="input-control">
+            <label for="search">
+              <img src="../assets/imgs/icone/chercher-blanc.png" />
+            </label>
+            <input
+              type="text"
+              id="search"
+              placeholder="Rechercher une voiture..."
+            />
+          </div>
+          <div class="checkbox">
+            <!-- Add checkbox -->
+            <div class="brand">
+              <p>Marque :</p>
+              <label for="audi">Audi</label>
+              <input type="checkbox" id="audi" />
+
+              <label for="bmw">BMW</label>
+              <input type="checkbox" id="bmw" />
+
+              <label for="ferrari">Ferrari</label>
+              <input type="checkbox" id="ferrari" />
+
+              <label for="mercedes-amg">Mercedes AMG</label>
+              <input type="checkbox" id="mercedes-amg" />
+
+              <label for="porsche">Porsche</label>
+              <input type="checkbox" id="porsche" />
+            </div>
+            <div class="car-type">
+              <p>Type :</p>
+              <label for="berline">Berline</label>
+              <input type="checkbox" id="berline" />
+
+              <label for="suv">SUV</label>
+              <input type="checkbox" id="suv" />
+
+              <label for="roadster">Roadster</label>
+              <input type="checkbox" id="roadster" />
+
+              <label for="coupe">Coupé</label>
+              <input type="checkbox" id="coupe" />
+
+              <label for="sportive">Sportive</label>
+              <input type="checkbox" id="sportive" />
+
+              <label for="luxe">Luxe</label>
+              <input type="checkbox" id="luxe" />
+
+              <label for="supercar">Supercar</label>
+              <input type="checkbox" id="supercar" />
+            </div>
+            <div class="country">
+              <p>Pays :</p>
+              <label for="france">France</label>
+              <input type="checkbox" id="france" />
+            </div>
+          </div>
+          <div class="price">
+            <p>Tranche de prix :</p>
+            <label for="min-price">Min :</label>
+            <div class="price-input">
+              <input
+                type="text"
+                inputmode="numeric"
+                id="min-price-input"
+                class="price-input"
+              />
+              <p>€</p>
+            </div>
+
+            <label for="max-price">Max :</label>
+            <div class="price-input">
+              <input
+                type="text"
+                inputmode="numeric"
+                id="max-price-input"
+                class="price-input"
+              />
+              <p>€</p>
+            </div>
+          </div>
         </div>
 
         <div class="table-results"><!-- JS --></div>
