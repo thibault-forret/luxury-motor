@@ -658,7 +658,29 @@ window.showNavbar = showNavbar;
 // ------- Checkbox --------
 
 // make dictionary of all checkbox info
-const filterInfo = {};
+const filterInfo = {
+  brand: {
+    audi: false,
+    bmw: false,
+    ferrari: false,
+    mercedesAmg: false,
+    porsche: false,
+  },
+  modelType: {
+    berline: false,
+    suv: false,
+    roadster: false,
+    coupe: false,
+    sportive: false,
+    luxe: false,
+    supercar: false,
+  },
+  sortingMode: {
+    alphabetical: true,
+    ascendingPrice: false,
+    descendingPrice: false,
+  },
+};
 
 // Brand
 const audiCheckbox = document.querySelector("#audi");
@@ -672,9 +694,9 @@ const porscheCheckbox = document.querySelector("#porsche");
 function initializeCheckboxBrandListeners() {
   audiCheckbox.addEventListener("change", function () {
     if (this.checked) {
-      // add to list
+      filterInfo.brand.audi = true;
     } else {
-      // remove from list
+      filterInfo.brand.audi = false;
     }
   });
 
