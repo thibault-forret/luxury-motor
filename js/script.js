@@ -655,6 +655,191 @@ function showNavbar() {
 // Associe la fonction "showNavbar" à la propriété "showNavbar" de l'objet global "window"
 window.showNavbar = showNavbar;
 
+// ------- Checkbox --------
+
+// make dictionary of all checkbox info
+const filterInfo = {};
+
+// Brand
+const audiCheckbox = document.querySelector("#audi");
+const bmwCheckbox = document.querySelector("#bmw");
+const ferrariCheckbox = document.querySelector("#ferrari");
+const mercedesAmgCheckbox = document.querySelector("#mercedes-amg");
+const porscheCheckbox = document.querySelector("#porsche");
+
+// Appel fonction filterData dès que un checkbox change
+
+function initializeCheckboxBrandListeners() {
+  audiCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      // add to list
+    } else {
+      // remove from list
+    }
+  });
+
+  bmwCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      // add to list
+    } else {
+      // remove from list
+    }
+  });
+
+  ferrariCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      // add to list
+    } else {
+      // remove from list
+    }
+  });
+
+  mercedesAmgCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      // add to list
+    } else {
+      // remove from list
+    }
+  });
+
+  porscheCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      // add to list
+    } else {
+      // remove from list
+    }
+  });
+}
+
+initializeCheckboxBrandListeners();
+
+// Type de modele
+
+const berlineCheckbox = document.querySelector("#berline");
+const suvCheckbox = document.querySelector("#suv");
+const roadsterCheckbox = document.querySelector("#roadster");
+const coupeCheckbox = document.querySelector("#coupe");
+const sportiveCheckbox = document.querySelector("#sportive");
+const luxeCheckbox = document.querySelector("#luxe");
+const supercarCheckbox = document.querySelector("#supercar");
+
+function initializeCheckboxCarTypeListeners() {
+  berlineCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      // add to list
+    } else {
+      // remove from list
+    }
+  });
+
+  suvCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      // add to list
+    } else {
+      // remove from list
+    }
+  });
+
+  roadsterCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      // add to list
+    } else {
+      // remove from list
+    }
+  });
+
+  coupeCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      // add to list
+    } else {
+      // remove from list
+    }
+  });
+
+  sportiveCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      // add to list
+    } else {
+      // remove from list
+    }
+  });
+
+  luxeCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      // add to list
+    } else {
+      // remove from list
+    }
+  });
+
+  supercarCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      // add to list
+    } else {
+      // remove from list
+    }
+  });
+}
+
+initializeCheckboxCarTypeListeners();
+
+// Country
+const franceCheckbox = document.querySelector("#france");
+
+function initializeCheckboxCountryListener() {
+  franceCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      // add to list
+    } else {
+      // remove from list
+    }
+  });
+}
+
+initializeCheckboxCountryListener();
+
+// Mode de tri
+const triDefaultCheckbox = document.querySelector("#tri-default");
+const prixCroissantCheckbox = document.querySelector("#prix-croissant");
+const prixDecroissantCheckbox = document.querySelector("#prix-decroissant");
+
+/**
+ * Initialise les écouteurs d'événements pour les cases à cocher.
+ */
+function initializeCheckboxTriListeners() {
+  // Ajoute un écouteur d'événement pour la case à cocher 1
+  triDefaultCheckbox.addEventListener("change", function () {
+    // Si la case à cocher 1 est cochée, décoche les autres cases à cocher
+    if (this.checked) {
+      prixCroissantCheckbox.checked = false;
+      prixDecroissantCheckbox.checked = false;
+    }
+  });
+
+  // Ajoute un écouteur d'événement pour la case à cocher 2
+  prixCroissantCheckbox.addEventListener("change", function () {
+    // Si la case à cocher 2 est cochée, décoche les autres cases à cocher
+    if (this.checked) {
+      triDefaultCheckbox.checked = false;
+      prixDecroissantCheckbox.checked = false;
+    }
+  });
+
+  // Ajoute un écouteur d'événement pour la case à cocher 3
+  prixDecroissantCheckbox.addEventListener("change", function () {
+    // Si la case à cocher 3 est cochée, décoche les autres cases à cocher
+    if (this.checked) {
+      triDefaultCheckbox.checked = false;
+      prixCroissantCheckbox.checked = false;
+    }
+  });
+}
+
+// Initialise les écouteurs d'événements pour les cases à cocher
+initializeCheckboxTriListeners();
+
+// Prix Control
+
 // Sélection des éléments d'entrée de prix min et max du DOM
 const minPriceInput = document.querySelector("#min-price-input");
 const maxPriceInput = document.querySelector("#max-price-input");

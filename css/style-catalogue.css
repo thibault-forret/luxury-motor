@@ -210,6 +210,12 @@ header {
 
 /* Filtre area */
 
+.checkbox input {
+  margin-right: 5px;
+  font-size: 15px;
+  font-family: "Khand", sans-serif;
+}
+
 .price-control {
   display: flex;
   flex-direction: row;
