@@ -10,6 +10,13 @@
  * 2. Valider si le JSON est correct.
  * 3. Itérer à travers chaque élément du tableau JSON et filtrer les URL valides.
  * 4. Renvoyer le tableau JSON mis à jour.
+ * 
+ * @version 1.0
+ * @php     7.0
+ * @category Traitement JSON
+ * @package  MonProjet/Scripts
+ * @license  MIT
+ * @link     https://example.com/documentation
  */
 
 // Lire le contenu JSON brut de la requête HTTP POST
