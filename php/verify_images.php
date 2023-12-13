@@ -10,9 +10,6 @@
  * 2. Valider si le JSON est correct.
  * 3. Itérer à travers chaque élément du tableau JSON et filtrer les URL valides.
  * 4. Renvoyer le tableau JSON mis à jour.
- * 
- * @author Thibault F.
- * @version 1.0
  */
 
 // Lire le contenu JSON brut de la requête HTTP POST
