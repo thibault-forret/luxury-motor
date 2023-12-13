@@ -172,9 +172,9 @@ function getImagesOfCar(carImgsArray, dataArray) {
  * @param {Array} dataArray - Tableau contenant les données des voitures regroupées par marque.
  * @returns {Promise} - La promesse de l'envoi des images et de la mise à jour des données locales.
  */
-async function sendImagesToServer(carImagesArray, dataArray) {
+function sendImagesToServer(carImagesArray, dataArray) {
   let jsonCarImages = JSON.stringify(carImagesArray);
-  await fetch("../php/verify_images.php", {
+  fetch("../php/verify_images.php", {
     method: "POST",
     body: jsonCarImages,
   })
@@ -660,20 +660,20 @@ window.showNavbar = showNavbar;
 // make dictionary of all checkbox info
 const filterInfo = {
   brand: {
-    audi: false,
-    bmw: false,
-    ferrari: false,
-    mercedesAmg: false,
-    porsche: false,
+    audi: true,
+    bmw: true,
+    ferrari: true,
+    mercedesAmg: true,
+    porsche: true,
   },
   modelType: {
-    berline: false,
-    suv: false,
-    roadster: false,
-    coupe: false,
-    sportive: false,
-    luxe: false,
-    supercar: false,
+    berline: true,
+    suv: true,
+    roadster: true,
+    coupe: true,
+    sportive: true,
+    luxe: true,
+    supercar: true,
   },
   sortingMode: {
     alphabetical: true,
@@ -682,6 +682,28 @@ const filterInfo = {
   },
 };
 
+var filterDataArray = dataArray.map((element) => ({
+  brand: element.brand,
+  logo: element.logo,
+  cars: element.cars,
+}));
+
+function filterBrandChange(brandString, brandBoolean) {
+  // Crée une copie de dataArray (tableau d'objets Brand)
+
+  console.log(dataArray);
+
+  if (brandBoolean === false) {
+    filterDataArray = filterDataArray.filter(
+      (brandElement) => brandElement.brand.toLowerCase() !== brandString
+    );
+  }
+}
+
+function filterInfoChange() {}
+
+// Voir pour rendre automatique initialisation of Listener
+
 // Brand
 const audiCheckbox = document.querySelector("#audi");
 const bmwCheckbox = document.querySelector("#bmw");
@@ -689,46 +711,54 @@ const ferrariCheckbox = document.querySelector("#ferrari");
 const mercedesAmgCheckbox = document.querySelector("#mercedes-amg");
 const porscheCheckbox = document.querySelector("#porsche");
 
-// Appel fonction filterData dès que un checkbox change
-
 function initializeCheckboxBrandListeners() {
   audiCheckbox.addEventListener("change", function () {
     if (this.checked) {
-      filterInfo.brand.audi = true;
+      filterInfo.brand.audi = true; // Ajouter à la liste
+      filterBrandChange("audi", true);
     } else {
-      filterInfo.brand.audi = false;
+      filterInfo.brand.audi = false; // Retirer de la liste
+      filterBrandChange("audi", false);
     }
   });
 
   bmwCheckbox.addEventListener("change", function () {
     if (this.checked) {
-      // add to list
+      filterInfo.brand.bmw = true; // Ajouter à la liste
+      filterBrandChange("bmw", false);
     } else {
-      // remove from list
+      filterInfo.brand.bmw = false; // Retirer de la liste
+      filterBrandChange("bmw", false);
     }
   });
 
   ferrariCheckbox.addEventListener("change", function () {
     if (this.checked) {
-      // add to list
+      filterInfo.brand.ferrari = true; // Ajouter à la liste
+      filterBrandChange("ferrari", false);
     } else {
-      // remove from list
+      filterInfo.brand.ferrari = false; // Retirer de la liste
+      filterBrandChange("ferrari", false);
     }
   });
 
   mercedesAmgCheckbox.addEventListener("change", function () {
     if (this.checked) {
-      // add to list
+      filterInfo.brand.mercedesAmg = true; // Ajouter à la liste
+      filterBrandChange("mercedes amg", false);
     } else {
-      // remove from list
+      filterInfo.brand.mercedesAmg = false; // Retirer de la liste
+      filterBrandChange("mercedes amg", false);
     }
   });
 
   porscheCheckbox.addEventListener("change", function () {
     if (this.checked) {
-      // add to list
+      filterInfo.brand.porsche = true; // Ajouter à la liste
+      filterBrandChange("porsche", false);
     } else {
-      // remove from list
+      filterInfo.brand.porsche = false; // Retirer de la liste
+      filterBrandChange("porsche", false);
     }
   });
 }
@@ -748,77 +778,76 @@ const supercarCheckbox = document.querySelector("#supercar");
 function initializeCheckboxCarTypeListeners() {
   berlineCheckbox.addEventListener("change", function () {
     if (this.checked) {
-      // add to list
+      filterInfo.carType.berline = true; // Ajouter à la liste
+      filterInfoChange();
     } else {
-      // remove from list
+      filterInfo.carType.berline = false; // Retirer de la liste
+      filterInfoChange();
     }
   });
 
   suvCheckbox.addEventListener("change", function () {
     if (this.checked) {
-      // add to list
+      filterInfo.carType.suv = true; // Ajouter à la liste
+      filterInfoChange();
     } else {
-      // remove from list
+      filterInfo.carType.suv = false; // Retirer de la liste
+      filterInfoChange();
     }
   });
 
   roadsterCheckbox.addEventListener("change", function () {
     if (this.checked) {
-      // add to list
+      filterInfo.carType.roadster = true; // Ajouter à la liste
+      filterInfoChange();
     } else {
-      // remove from list
+      filterInfo.carType.roadster = false; // Retirer de la liste
+      filterInfoChange();
     }
   });
 
   coupeCheckbox.addEventListener("change", function () {
     if (this.checked) {
-      // add to list
+      filterInfo.carType.coupe = true; // Ajouter à la liste
+      filterInfoChange();
     } else {
-      // remove from list
+      filterInfo.carType.coupe = false; // Retirer de la liste
+      filterInfoChange();
     }
   });
 
   sportiveCheckbox.addEventListener("change", function () {
     if (this.checked) {
-      // add to list
+      filterInfo.carType.sportive = true; // Ajouter à la liste
+      filterInfoChange();
     } else {
-      // remove from list
+      filterInfo.carType.sportive = false; // Retirer de la liste
+      filterInfoChange();
     }
   });
 
   luxeCheckbox.addEventListener("change", function () {
     if (this.checked) {
-      // add to list
+      filterInfo.carType.luxe = true; // Ajouter à la liste
+      filterInfoChange();
     } else {
-      // remove from list
+      filterInfo.carType.luxe = false; // Retirer de la liste
+      filterInfoChange();
     }
   });
 
   supercarCheckbox.addEventListener("change", function () {
     if (this.checked) {
-      // add to list
+      filterInfo.carType.supercar = true; // Ajouter à la liste
+      filterInfoChange();
     } else {
-      // remove from list
+      filterInfo.carType.supercar = false; // Retirer de la liste
+      filterInfoChange();
     }
   });
 }
 
 initializeCheckboxCarTypeListeners();
-
-// Country
-const franceCheckbox = document.querySelector("#france");
-
-function initializeCheckboxCountryListener() {
-  franceCheckbox.addEventListener("change", function () {
-    if (this.checked) {
-      // add to list
-    } else {
-      // remove from list
-    }
-  });
-}
-
-initializeCheckboxCountryListener();
 
 // Mode de tri
 const triDefaultCheckbox = document.querySelector("#tri-default");
