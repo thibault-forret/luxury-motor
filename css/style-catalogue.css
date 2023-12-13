@@ -208,6 +208,47 @@ header {
   font-size: 25px;
 }
 
+/* Filtre area */
+
+.checkbox input {
+  margin-right: 5px;
+  font-size: 15px;
+  font-family: "Khand", sans-serif;
+}
+
+.price-control {
+  display: flex;
+  flex-direction: row;
+}
+
+.price-div {
+  padding-right: 25px;
+}
+
+.price-input {
+  padding: 5px 10px;
+  border-radius: 10px;
+  outline: 1px solid #000;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.price-input input {
+  margin-right: 5px;
+  font-size: 15px;
+  font-family: "Khand", sans-serif;
+  border: 0;
+  outline: 0;
+}
+
+.price-input:focus-within {
+  outline-color: #00ccff;
+  outline-width: 2px;
+}
+
+/* =========== */
+
 .table-results {
   width: 98%;
   height: auto;

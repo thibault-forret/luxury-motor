@@ -172,9 +172,9 @@ function getImagesOfCar(carImgsArray, dataArray) {
  * @param {Array} dataArray - Tableau contenant les données des voitures regroupées par marque.
  * @returns {Promise} - La promesse de l'envoi des images et de la mise à jour des données locales.
  */
-async function sendImagesToServer(carImagesArray, dataArray) {
+function sendImagesToServer(carImagesArray, dataArray) {
   let jsonCarImages = JSON.stringify(carImagesArray);
-  await fetch("../php/verify_images.php", {
+  fetch("../php/verify_images.php", {
     method: "POST",
     body: jsonCarImages,
   })
@@ -654,3 +654,289 @@ function showNavbar() {
 
 // Associe la fonction "showNavbar" à la propriété "showNavbar" de l'objet global "window"
 window.showNavbar = showNavbar;
+
+// ------- Checkbox --------
+
+// make dictionary of all checkbox info
+const filterInfo = {
+  brand: {
+    audi: true,
+    bmw: true,
+    ferrari: true,
+    mercedesAmg: true,
+    porsche: true,
+  },
+  modelType: {
+    berline: true,
+    suv: true,
+    roadster: true,
+    coupe: true,
+    sportive: true,
+    luxe: true,
+    supercar: true,
+  },
+  sortingMode: {
+    alphabetical: true,
+    ascendingPrice: false,
+    descendingPrice: false,
+  },
+};
+
+var filterDataArray = dataArray.map((element) => ({
+  brand: element.brand,
+  logo: element.logo,
+  cars: element.cars,
+}));
+
+function filterBrandChange(brandString, brandBoolean) {
+  // Crée une copie de dataArray (tableau d'objets Brand)
+
+  console.log(dataArray);
+
+  if (brandBoolean === false) {
+    filterDataArray = filterDataArray.filter(
+      (brandElement) => brandElement.brand.toLowerCase() !== brandString
+    );
+  }
+}
+
+function filterInfoChange() {}
+
+// Voir pour rendre automatique initialisation of Listener
+
+// Brand
+const audiCheckbox = document.querySelector("#audi");
+const bmwCheckbox = document.querySelector("#bmw");
+const ferrariCheckbox = document.querySelector("#ferrari");
+const mercedesAmgCheckbox = document.querySelector("#mercedes-amg");
+const porscheCheckbox = document.querySelector("#porsche");
+
+function initializeCheckboxBrandListeners() {
+  audiCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      filterInfo.brand.audi = true; // Ajouter à la liste
+      filterBrandChange("audi", true);
+    } else {
+      filterInfo.brand.audi = false; // Retirer de la liste
+      filterBrandChange("audi", false);
+    }
+  });
+
+  bmwCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      filterInfo.brand.bmw = true; // Ajouter à la liste
+      filterBrandChange("bmw", false);
+    } else {
+      filterInfo.brand.bmw = false; // Retirer de la liste
+      filterBrandChange("bmw", false);
+    }
+  });
+
+  ferrariCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      filterInfo.brand.ferrari = true; // Ajouter à la liste
+      filterBrandChange("ferrari", false);
+    } else {
+      filterInfo.brand.ferrari = false; // Retirer de la liste
+      filterBrandChange("ferrari", false);
+    }
+  });
+
+  mercedesAmgCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      filterInfo.brand.mercedesAmg = true; // Ajouter à la liste
+      filterBrandChange("mercedes amg", false);
+    } else {
+      filterInfo.brand.mercedesAmg = false; // Retirer de la liste
+      filterBrandChange("mercedes amg", false);
+    }
+  });
+
+  porscheCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      filterInfo.brand.porsche = true; // Ajouter à la liste
+      filterBrandChange("porsche", false);
+    } else {
+      filterInfo.brand.porsche = false; // Retirer de la liste
+      filterBrandChange("porsche", false);
+    }
+  });
+}
+
+initializeCheckboxBrandListeners();
+
+// Type de modele
+
+const berlineCheckbox = document.querySelector("#berline");
+const suvCheckbox = document.querySelector("#suv");
+const roadsterCheckbox = document.querySelector("#roadster");
+const coupeCheckbox = document.querySelector("#coupe");
+const sportiveCheckbox = document.querySelector("#sportive");
+const luxeCheckbox = document.querySelector("#luxe");
+const supercarCheckbox = document.querySelector("#supercar");
+
+function initializeCheckboxCarTypeListeners() {
+  berlineCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      filterInfo.carType.berline = true; // Ajouter à la liste
+      filterInfoChange();
+    } else {
+      filterInfo.carType.berline = false; // Retirer de la liste
+      filterInfoChange();
+    }
+  });
+
+  suvCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      filterInfo.carType.suv = true; // Ajouter à la liste
+      filterInfoChange();
+    } else {
+      filterInfo.carType.suv = false; // Retirer de la liste
+      filterInfoChange();
+    }
+  });
+
+  roadsterCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      filterInfo.carType.roadster = true; // Ajouter à la liste
+      filterInfoChange();
+    } else {
+      filterInfo.carType.roadster = false; // Retirer de la liste
+      filterInfoChange();
+    }
+  });
+
+  coupeCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      filterInfo.carType.coupe = true; // Ajouter à la liste
+      filterInfoChange();
+    } else {
+      filterInfo.carType.coupe = false; // Retirer de la liste
+      filterInfoChange();
+    }
+  });
+
+  sportiveCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      filterInfo.carType.sportive = true; // Ajouter à la liste
+      filterInfoChange();
+    } else {
+      filterInfo.carType.sportive = false; // Retirer de la liste
+      filterInfoChange();
+    }
+  });
+
+  luxeCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      filterInfo.carType.luxe = true; // Ajouter à la liste
+      filterInfoChange();
+    } else {
+      filterInfo.carType.luxe = false; // Retirer de la liste
+      filterInfoChange();
+    }
+  });
+
+  supercarCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      filterInfo.carType.supercar = true; // Ajouter à la liste
+      filterInfoChange();
+    } else {
+      filterInfo.carType.supercar = false; // Retirer de la liste
+      filterInfoChange();
+    }
+  });
+}
+
+initializeCheckboxCarTypeListeners();
+
+// Mode de tri
+const triDefaultCheckbox = document.querySelector("#tri-default");
+const prixCroissantCheckbox = document.querySelector("#prix-croissant");
+const prixDecroissantCheckbox = document.querySelector("#prix-decroissant");
+
+/**
+ * Initialise les écouteurs d'événements pour les cases à cocher.
+ */
+function initializeCheckboxTriListeners() {
+  // Ajoute un écouteur d'événement pour la case à cocher 1
+  triDefaultCheckbox.addEventListener("change", function () {
+    // Si la case à cocher 1 est cochée, décoche les autres cases à cocher
+    if (this.checked) {
+      prixCroissantCheckbox.checked = false;
+      prixDecroissantCheckbox.checked = false;
+    }
+  });
+
+  // Ajoute un écouteur d'événement pour la case à cocher 2
+  prixCroissantCheckbox.addEventListener("change", function () {
+    // Si la case à cocher 2 est cochée, décoche les autres cases à cocher
+    if (this.checked) {
+      triDefaultCheckbox.checked = false;
+      prixDecroissantCheckbox.checked = false;
+    }
+  });
+
+  // Ajoute un écouteur d'événement pour la case à cocher 3
+  prixDecroissantCheckbox.addEventListener("change", function () {
+    // Si la case à cocher 3 est cochée, décoche les autres cases à cocher
+    if (this.checked) {
+      triDefaultCheckbox.checked = false;
+      prixCroissantCheckbox.checked = false;
+    }
+  });
+}
+
+// Initialise les écouteurs d'événements pour les cases à cocher
+initializeCheckboxTriListeners();
+
+// Prix Control
+
+// Sélection des éléments d'entrée de prix min et max du DOM
+const minPriceInput = document.querySelector("#min-price-input");
+const maxPriceInput = document.querySelector("#max-price-input");
+
+/**
+ * Initialise les écouteurs d'événements pour les champs de prix min et max.
+ * Les événements incluent "input" pour filtrer les caractères non numériques
+ * et "blur" pour vérifier et échanger les valeurs si nécessaire.
+ */
+function initializeMinMaxPriceListener() {
+  // Vérifie si les éléments minPriceInput et maxPriceInput existent dans le DOM
+  if (minPriceInput !== null && maxPriceInput !== null) {
+    // Ajoute un écouteur d'événement "input" pour filtrer les caractères non numériques
+    maxPriceInput.addEventListener("input", function () {
+      // Remplace tout caractère qui n'est pas un chiffre par une chaîne vide
+      this.value = this.value.replace(/\D/g, "");
+    });
+    minPriceInput.addEventListener("input", function () {
+      // Remplace tout caractère qui n'est pas un chiffre par une chaîne vide
+      this.value = this.value.replace(/\D/g, "");
+    });
+    // Ajoute un écouteur d'événement "blur" pour vérifier et échanger les valeurs si nécessaire
+    minPriceInput.addEventListener("blur", checkControl);
+    maxPriceInput.addEventListener("blur", checkControl);
+  } else {
+    // Affiche un message d'erreur dans la console si minPriceInput ou maxPriceInput est null
+    console.error("minPriceInput / maxPriceInput est null.");
+  }
+}
+
+/**
+ * Vérifie les valeurs des champs de prix min et max.
+ * Si la valeur de min est supérieure à celle de max, échange les valeurs.
+ */
+function checkControl() {
+  // Convertit les valeurs en nombres entiers
+  const minValue = parseInt(minPriceInput.value);
+  const maxValue = parseInt(maxPriceInput.value);
+
+  // Vérifie si la valeur de min est supérieure à celle de max
+  if (minValue > maxValue) {
+    // Échange les valeurs des champs de prix min et max
+    minPriceInput.value = maxValue;
+    maxPriceInput.value = minValue;
+  }
+}
+
+// Initialise les écouteurs d'événements pour les champs de prix min et max
+initializeMinMaxPriceListener();
