@@ -1,42 +1,46 @@
 <?php
 /**
- * JSON Data Processing PHP Script
+ * Traitement des données JSON avec un script PHP
  *
- * This PHP script receives JSON data via an HTTP POST request, validates the JSON,
- * filters valid image URLs, and returns updated JSON with only valid image URLs.
+ * Ce script PHP reçoit des données JSON via une requête HTTP POST, valide le JSON,
+ * filtre les URL d'images valides et renvoie le JSON mis à jour avec uniquement les URL d'images valides.
  *
- * Steps:
- * 1. Read the raw JSON content from the HTTP POST request.
- * 2. Validate if the JSON is valid.
- * 3. Iterate through each element of the JSON array and filter valid URLs.
- * 4. Return the updated JSON array.
+ * Étapes :
+ * 1. Lire le contenu JSON brut de la requête HTTP POST.
+ * 2. Valider si le JSON est correct.
+ * 3. Itérer à travers chaque élément du tableau JSON et filtrer les URL valides.
+ * 4. Renvoyer le tableau JSON mis à jour.
  * 
- * @author Thibault F.
  * @version 1.0
+ * @php     7.0
+ * @category Traitement JSON
+ * @package  MonProjet/Scripts
+ * @license  MIT
+ * @link     https://example.com/documentation
  */
 
-// Read the raw JSON content from the HTTP POST request
+// Lire le contenu JSON brut de la requête HTTP POST
 $rawJSONData = file_get_contents('php://input');
 
-// Validate if the JSON is valid
+// Valider si le JSON est correct
 $decodedData = json_decode($rawJSONData, true);
 
 if ($decodedData === null && json_last_error() !== JSON_ERROR_NONE) {
-    // Handle invalid JSON error
-    echo json_encode(['error' => 'Invalid JSON']);
+    // Gérer l'erreur de JSON invalide
+    echo json_encode(['error' => 'JSON invalide']);
     exit;
 }
 
-// Function to verify if a file/image exists
+// Fonction pour vérifier si un fichier/image existe
 $verifyImage = function($imageUrl) {
     return file_exists($imageUrl);
 };
 
-// Iterate through each element of the JSON array and filter valid URLs
+// Itérer à travers chaque élément du tableau JSON et filtrer les URL valides
 foreach ($decodedData as &$imageArray) {
     $imageArray = array_filter($imageArray, $verifyImage);
 }
 
-// Return the updated JSON array
+// Renvoyer le tableau JSON mis à jour
 echo json_encode($decodedData);
 ?>
