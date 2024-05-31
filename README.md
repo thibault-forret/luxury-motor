@@ -2,7 +2,7 @@
 ## Projet Personnel - Site de location de voiture
 
 ### Description
-Ce projet est un site de location de voitures, réalisé durant ma première année de BUT1, en parallèle de mes études. Il a été réalisé en utilisant les langages suivants :
+Ce projet est un site de location de voitures, réalisé durant ma première année de BUT Informatique, en parallèle de mes études. Il a été réalisé en utilisant les langages suivants :
   - HTML
   - CSS
   - JavaScript
