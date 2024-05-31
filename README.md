@@ -1,4 +1,11 @@
 # car_renting
-Website for renting corporation
+## Projet Personnel - Site de location de voiture
 
-// To do
+### Description
+Ce projet est un site de location de voitures, réalisé durant ma première année de BUT1, en parallèle de mes études. Il a été réalisé en utilisant les langages suivants :
+  - HTML
+  - CSS
+  - JavaScript
+
+### Licence
+Ce projet est sous licence [MIT](https://opensource.org/licenses/MIT).
