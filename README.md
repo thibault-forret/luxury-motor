@@ -1,11 +1,10 @@
-# car_renting
-## Projet Personnel - Site de location de voiture
+# 📌 Luxury Motor
 
-### Description
-Ce projet est un site de location de voitures, réalisé durant ma première année de BUT Informatique, en parallèle de mes études. Il a été réalisé en utilisant les langages suivants :
-  - HTML
-  - CSS
-  - JavaScript
+## 📖 Contexte
+Projet personnel réalisé durant ma première année de BUT Informatique.
 
-### Licence
-Ce projet est sous licence [MIT](https://opensource.org/licenses/MIT).
+## 📝 Description
+Ce projet consiste en un site web de location de voitures, permettant aux utilisateurs de consulter les véhicules disponibles, de vérifier leurs caractéristiques et de procéder à une réservation en ligne.
+
+## 🛠 Technologies utilisées
+- **Langages** : HTML, CSS, JavaScript, TypeScript
